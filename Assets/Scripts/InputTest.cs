@@ -2,20 +2,34 @@ using UnityEngine;
 
 public class InputTest : MonoBehaviour
 {
-    private InputSystem_Actions testInputAction_;
-    void Start()
+    private InputSystem_Actions inputAction;
+    public float moveSpeed = 5f; // 移動速度
+
+    private void Awake()
     {
-        testInputAction_ = new InputSystem_Actions();
-        testInputAction_ .Enable();
+        inputAction = new InputSystem_Actions();
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        inputAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputAction.Disable();
+    }
+
     void Update()
     {
-        //ボタンを押された瞬間のみ
-        if (testInputAction_.Player.Move.triggered)
+        // 移動入力を読み取る (WASD / スティック)
+        Vector2 moveInput = inputAction.Player.Move.ReadValue<Vector2>();
+
+        // 入力がある時だけ移動
+        if (moveInput != Vector2.zero)
         {
-            Debug.Log("move");
+            Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+            transform.Translate(move * moveSpeed * Time.deltaTime, Space.World);
         }
     }
 }
