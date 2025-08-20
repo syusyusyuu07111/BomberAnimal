@@ -1,38 +1,55 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class InputTest : MonoBehaviour
 {
     private InputSystem_Actions inputAction;
     private Rigidbody rb;
+    private Animator animator;
 
     [Header("Move")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 5f;          // å®Ÿéš›ã®ç§»å‹•é€Ÿåº¦
     private Vector2 moveInput;
 
     [Header("Jump")]
     public float jumpForce = 5f;
-    public Transform groundCheck;      // –¢İ’è‚Å‚àOKi‰º‚ÅƒtƒH[ƒ‹ƒoƒbƒNj
+    public Transform groundCheck;         // æœªè¨­å®šã§ã‚‚OKï¼ˆãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚ã‚Šï¼‰
     public float groundRadius = 0.2f;
-    public LayerMask groundMask = ~0;  // Šù’è‚Íu‘S•”v= İ’è‚µ–Y‚ê‚Ä‚àÚ’n”»’è‚·‚é
+    public LayerMask groundMask = ~0;
     private bool jumpQueued;
+
+    [Header("BlendTree (Idle<->Move)")]
+    public string blendParam = "Blend";   // Animator 1D BlendTree ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å
+    public float maxSpeedForBlend = 5f;   // Blend=1 ã¨ã¿ãªã™é€Ÿåº¦ï¼ˆé€šå¸¸ã¯ moveSpeed ã¨åŒå€¤ï¼‰
+    public float blendDampTime = 0.1f;    // Blend ã®å¹³æ»‘æ™‚é–“
+    public float speedSnapEpsilon = 0.05f;// ã“ã‚Œæœªæº€ã®é€Ÿåº¦ã¯0æ‰±ã„ï¼ˆã‚¬ã‚¿ã¤ãé˜²æ­¢ï¼‰
+
+    // å†…éƒ¨
+    private Vector3 lastRbPos;            // â˜… Rigidbody ã®å‰ãƒ•ãƒ¬ãƒ¼ãƒ ä½ç½®
+    private float blendSmoothed;
 
     private void Awake()
     {
         inputAction = new InputSystem_Actions();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+
+        // ç‰©ç†ã§å€’ã‚Œãªã„ã‚ˆã†ã« X/Z å›è»¢ã‚’å›ºå®š
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        if (maxSpeedForBlend <= 0f) maxSpeedForBlend = moveSpeed;
+        lastRbPos = rb.position;          // â˜… ã“ã“ã‚‚ rb.position
     }
 
     private void OnEnable()
     {
         inputAction.Enable();
-        // ”O‚Ì‚½‚ßŒÂ•ÊEnable
-        inputAction.Player.Jump.Enable();
         inputAction.Player.Move.Enable();
+        inputAction.Player.Jump.Enable();
 
-        inputAction.Player.Jump.started += OnJump;  // ƒƒO—p‚É started ‚àE‚¤
+        inputAction.Player.Jump.started += OnJump;
         inputAction.Player.Jump.performed += OnJump;
         inputAction.Player.Jump.canceled += OnJump;
     }
@@ -47,40 +64,55 @@ public class InputTest : MonoBehaviour
 
     private void Update()
     {
+        // å…¥åŠ›ï¼ˆWASD/å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ï¼‰
         moveInput = inputAction.Player.Move.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        // --- Ú’n”»’èi–¢İ’è‚Å‚à“®‚­ƒtƒH[ƒ‹ƒoƒbƒNj ---
+        // --- æ¥åœ°åˆ¤å®šï¼ˆæœªè¨­å®šã§ã‚‚å‹•ããƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ï¼‰ ---
         Vector3 checkPos = groundCheck ? groundCheck.position : transform.position + Vector3.down * 0.6f;
         bool isGrounded = Physics.CheckSphere(checkPos, groundRadius, groundMask, QueryTriggerInteraction.Ignore);
 
-        // --- ˆÚ“® ---
+        // --- ç§»å‹• ---
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
         rb.MovePosition(rb.position + move * moveSpeed * Time.fixedDeltaTime);
 
-        // --- ƒWƒƒƒ“ƒv ---
+        // å…¥åŠ›ã‚¼ãƒ­ãªã‚‰æ°´å¹³é€Ÿåº¦ã‚’ã‚¹ãƒŠãƒƒãƒ— 0ï¼ˆæºã‚Œé˜²æ­¢ãƒ»ä»»æ„ï¼‰
+        if (moveInput.sqrMagnitude < 0.0001f)
+        {
+            var v = rb.linearVelocity; // Unity 6
+            v.x = 0f; v.z = 0f;
+            rb.linearVelocity = v;
+        }
+
+        // --- å®Ÿé€Ÿåº¦ â†’ Blend å€¤ï¼ˆIdle 0 / Move 1ï¼‰ ---
+        Vector3 delta = rb.position - lastRbPos;   // â˜… transform ã§ã¯ãªã rb.position
+        delta.y = 0f;
+        float planarSpeed = delta.magnitude / Mathf.Max(Time.fixedDeltaTime, 0.0001f);
+        if (planarSpeed < speedSnapEpsilon) planarSpeed = 0f;
+
+        float blendTarget = Mathf.Clamp01(maxSpeedForBlend > 0f ? planarSpeed / maxSpeedForBlend : 0f);
+
+        // Dampï¼ˆæŒ‡æ•°å¹³æ»‘ï¼‰
+        float k = 1f - Mathf.Exp(-(1f / Mathf.Max(0.0001f, blendDampTime)) * Time.fixedDeltaTime);
+        blendSmoothed = Mathf.Lerp(blendSmoothed, blendTarget, k);
+        animator.SetFloat(blendParam, blendSmoothed);
+
+        lastRbPos = rb.position;          // â˜… æ›´æ–°
+
+        // --- ã‚¸ãƒ£ãƒ³ãƒ— ---
         if (jumpQueued && isGrounded)
         {
-            // ã‰º‘¬“x‚ğƒŠƒZƒbƒg‚µ‚Ä‚©‚çƒCƒ“ƒpƒ‹ƒX
-            var v = rb.linearVelocity;
-            v.y = 0f;
-            rb.linearVelocity = v;
-
+            var v = rb.linearVelocity; v.y = 0f; rb.linearVelocity = v;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            Debug.Log("ƒWƒƒƒ“ƒvÀsI");
         }
         jumpQueued = false;
     }
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        // ‚±‚±‚ªo‚È‚¢‚È‚çu‡@”­‰Î‚µ‚Ä‚¢‚È‚¢v
-        Debug.Log($"Jump {ctx.phase}"); // started / performed / canceled ‚ªo‚é
-
-        if (ctx.performed)
-            jumpQueued = true; // Ÿ‚ÌFixedUpdate‚Åˆ—
+        if (ctx.performed) jumpQueued = true;
     }
 
     private void OnDrawGizmosSelected()
