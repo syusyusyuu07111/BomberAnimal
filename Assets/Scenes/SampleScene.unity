@@ -326,6 +326,11 @@ MonoBehaviour:
   maxSpeedForBlend: 5
   blendDampTime: 0.1
   speedSnapEpsilon: 0.05
+  cam: {fileID: 330585546}
+  rotateSpeed: 720
+  autoFaceCameraWhenIdle: 1
+  idleFaceSpeed: 360
+  moveFaceThreshold: 0.05
 --- !u!54 &172971505
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -537,6 +542,7 @@ MonoBehaviour:
   sensitivityY: 120
   minPitch: -20
   maxPitch: 60
+  maxYawOffset: 80
   collisionRadius: 0.25
   skin: 0.05
   collisionMask:
