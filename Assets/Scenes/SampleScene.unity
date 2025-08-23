@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 570694013}
   - component: {fileID: 570694012}
   - component: {fileID: 570694016}
+  - component: {fileID: 570694017}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -763,7 +764,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3a265c91af0a14349a67c55184854440, type: 2}
+  - {fileID: 2100000, guid: 07c15fac4ef70594d9f78819a1f275b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -834,7 +835,34 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &570694017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570694011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a8754df43643a4bbf8e73930061a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetRenderer: {fileID: 570694013}
+  targetCollider: {fileID: 570694012}
+  voxelPrefab: {fileID: 6322163912185630841, guid: cb906eb7d9530cc4ebb1b9e5665e5faf, type: 3}
+  poolSize: 300
+  voxelSize: 0.1
+  burstRadius: 0.6
+  spacing: 0.12
+  explosionForce: 6
+  explosionUp: 0.2
+  voxelsLife: 0.8
+  clipCenterProp: _ClipCenterWS
+  clipRadiusProp: _ClipRadius
+  clipRadiusMax: 0.55
+  clipExpandTime: 0.3
+  clipShrinkTime: 0.35
 --- !u!1001 &632006399
 PrefabInstance:
   m_ObjectHideFlags: 0
