@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingStage_Background
       objectReference: {fileID: 0}
+    - target: {fileID: 1868819726402176, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4872714130585634, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -803,7 +807,7 @@ Transform:
   m_GameObject: {fileID: 570694011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.36, y: 0.58, z: 0.64}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -860,9 +864,12 @@ MonoBehaviour:
   voxelsLife: 0.8
   clipCenterProp: _ClipCenterWS
   clipRadiusProp: _ClipRadius
+  clipDirProp: _ClipDirWS
+  clipCosProp: _ClipCos
   clipRadiusMax: 0.55
   clipExpandTime: 0.3
   clipShrinkTime: 0.35
+  clipConeAngleDeg: 35
 --- !u!1001 &632006399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -992,6 +999,10 @@ PrefabInstance:
     - target: {fileID: 1868819726402176, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_Name
       value: TrainingStage_Background (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868819726402176, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872714130585634, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_LocalPosition.x
