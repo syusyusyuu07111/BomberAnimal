@@ -138,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1868819726402176, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4872714130585634, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_LocalPosition.x
@@ -855,6 +855,7 @@ GameObject:
   - component: {fileID: 943437100}
   - component: {fileID: 943437099}
   - component: {fileID: 943437103}
+  - component: {fileID: 943437104}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -966,6 +967,46 @@ MonoBehaviour:
   stencilRef: 1
   targetRenderers:
   - {fileID: 943437100}
+  maxHoles: 8
+  drawGizmos: 0
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.25}
+  explodeWhenHolesReach: 1
+  holesToExplode: 4
+  destroyGameObject: 1
+  debrisPrefab: {fileID: 943437098}
+  onExplode:
+    m_PersistentCalls:
+      m_Calls: []
+  explosionVfxPrefab: {fileID: 362261158077530393, guid: 20fda529c996a334da7fd65b48ea40df, type: 3}
+  explosionSfx: {fileID: 0}
+  explosionRadius: 4
+  explosionForce: 20
+  upwardModifier: 0.25
+  explosionAffectMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!64 &943437104
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943437098}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1105645533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -980,7 +1021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1868819726402176, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4872714130585634, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
       propertyPath: m_LocalPosition.x

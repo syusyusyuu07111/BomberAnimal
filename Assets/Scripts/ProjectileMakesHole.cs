@@ -1,69 +1,89 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(Rigidbody))]
 public class ProjectileMakesHole : MonoBehaviour
 {
     [Header("Hole")]
-    public GameObject holeMaskPrefab;   // StencilMask のプレハブ
-    public float holeRadius = 0.3f;     // 穴の半径
-    public bool destroyOnHit = true;    // 1回当たったら消す
+    public float holeRadius = 0.25f;
+    public LayerMask holeAffectMask = ~0;      // 穴を開けてよい相手のレイヤー
 
-    [Header("Debug")]
-    public bool debugLog = true;
+    [Header("Life")]
+    public bool destroyOnHit = true;           // 命中で弾を消す
+    public bool destroyOnlyWhenHoleMade = false; // 穴が開いた時だけ消す
+    public float autoDestroyAfter = 5f;        // 自動消滅
+    public float armingDelay = 0.08f;          // 発射直後は当たり無効
 
-    // --- Trigger でも Collision でも拾えるよう両方実装 ---
-    void OnCollisionEnter(Collision col)
+    [Header("Shooter Ignore")]
+    public GameObject shooterRoot;             // 発射者のRoot（衝突無視用）
+
+    float spawnTime;
+    Collider myCol;
+
+    void Awake()
     {
-        if (TryMakeHole(col.collider, col.GetContact(0).point, col.GetContact(0).normal) && destroyOnHit)
-            Destroy(gameObject);
+        spawnTime = Time.time;
+        myCol = GetComponent<Collider>();
+        if (autoDestroyAfter > 0f) Destroy(gameObject, autoDestroyAfter);
+
+        // shooterRoot が事前に入っていれば衝突無視をセット
+        if (shooterRoot) IgnoreShooterColliders(shooterRoot, true);
+    }
+
+    // Attack側から呼んで発射者を設定
+    public void SetShooter(GameObject shooter)
+    {
+        shooterRoot = shooter;
+        if (!myCol) myCol = GetComponent<Collider>();
+        IgnoreShooterColliders(shooterRoot, true);
+    }
+
+    void OnDestroy()
+    {
+        if (shooterRoot && myCol) IgnoreShooterColliders(shooterRoot, false);
+    }
+
+    void IgnoreShooterColliders(GameObject root, bool ignore)
+    {
+        foreach (var sc in root.GetComponentsInChildren<Collider>())
+            Physics.IgnoreCollision(myCol, sc, ignore);
+    }
+
+    bool Armed => Time.time >= spawnTime + armingDelay;
+
+    void OnCollisionEnter(Collision c)
+    {
+        if (!Armed) return;
+        HandleHit(c.collider, c.GetContact(0).point);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Trigger を使っている場合は近傍点で代用
-        Vector3 p = transform.position;
-        Vector3 n = -transform.forward; // おおよその法線
-        if (TryMakeHole(other, p, n) && destroyOnHit)
-            Destroy(gameObject);
+        if (!Armed) return;
+        HandleHit(other, other.ClosestPoint(transform.position));
     }
 
-    bool TryMakeHole(Collider col, Vector3 point, Vector3 normal)
+    void HandleHit(Collider col, Vector3 hitPoint)
     {
-        // 破壊対象マーカーを探す
-        var destructible = col.GetComponentInParent<DestructibleStencil>();
-        if (!destructible)
+        // 発射者なら無視
+        if (shooterRoot && col.transform.IsChildOf(shooterRoot.transform)) return;
+
+        bool madeHole = false;
+
+        // 対象レイヤー以外なら穴を開けない（そのまま通過）
+        if (((1 << col.gameObject.layer) & holeAffectMask) != 0)
         {
-            if (debugLog) Debug.Log($"[Projectile] Hit '{col.name}' (no DestructibleStencil)");
-            return false;
+            var ds = col.GetComponentInParent<DestructibleStencil>();
+            if (ds != null)
+            {
+                ds.AddHole(hitPoint, holeRadius);
+                madeHole = true;
+            }
         }
 
-        // 穴プレハブが未設定なら何もしない
-        if (!holeMaskPrefab)
+        // 消す条件を制御
+        if (destroyOnHit && (!destroyOnlyWhenHoleMade || madeHole))
         {
-            Debug.LogWarning("[Projectile] holeMaskPrefab 未設定です。");
-            return false;
+            Destroy(gameObject);
         }
-
-        // 穴を生成（Zファイト回避に法線方向へ少し押し出す）
-        Vector3 pos = point + normal * 0.005f;
-        Quaternion rot = Quaternion.LookRotation(normal, Vector3.up);
-
-        var go = Instantiate(holeMaskPrefab, pos, rot);
-        go.transform.localScale = Vector3.one * (holeRadius * 2f);
-        go.transform.SetParent(destructible.transform, true); // 対象が動いても追従
-
-        // 対象と同じ _StencilRef を穴側にも渡す（この対象だけ抜ける）
-        var r = go.GetComponent<Renderer>();
-        if (r)
-        {
-            var mpb = new MaterialPropertyBlock();
-            r.GetPropertyBlock(mpb);
-            mpb.SetInt("_StencilRef", destructible.stencilRef);
-            r.SetPropertyBlock(mpb);
-        }
-
-        if (debugLog) Debug.Log($"[Projectile] 穴生成 OK at {pos} (target={destructible.name}, _StencilRef={destructible.stencilRef})");
-        return true;
     }
 }

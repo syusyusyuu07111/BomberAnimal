@@ -104,7 +104,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76755c725ccb50428ecae9ee02707cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holeMaskPrefab: {fileID: 3101384241768830935, guid: bc6a7a25ceeb356468ec4f6473781e42, type: 3}
   holeRadius: 0.3
   destroyOnHit: 1
-  debugLog: 1
+  autoDestroyAfter: 5
