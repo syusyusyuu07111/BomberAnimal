@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c9c1e319e0959f1409e45ef113aa2bb8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209077
+  packageName: Acorns - Inhabitants of the Forest
+  packageVersion: 2.0.0
+  assetPath: Assets/Acorns-InhabitantsoftheForest/Aimations/Acorns_Humanid/Acorn_Humanoid.controller
+  uploadId: 730596

@@ -100,3 +100,11 @@ InitTestScene*.unity*
 Assets/SDF_BasicTrainingStage/PostProcessing/Textures/LUTs.meta
 Assets/SDF_BasicTrainingStage/PostProcessing/Textures/Lens Dirt/LensDirt02.png
 Assets/Matthew Guz/Hits Effects FREE/Textures/1-Smoke.tiff
+Assets/Stylized Explosives/Textures/PBR/Bombs/Bombs_Bombs_Normal.png
+Assets/Stylized Explosives/Textures/URP/Dynamite/Dynamite_Normal.png
+Assets/Stylized Explosives/Textures/HDR/AGC/AGC_Normal.png
+Assets/Stylized Explosives/Textures/PBR/Dynamite/Dynamite_Normal.png
+Assets/Stylized Explosives/Textures/PBR/Barrel/Barrel_Metallic.png
+Assets/Stylized Explosives/Textures/URP/AGC/AGC_Normal.png
+Assets/Stylized Explosives/Textures/PBR/AGC/AGC_Normal.png
+Assets/Stylized Explosives/Textures/PBR/Barrel/Barrel_Normal.png

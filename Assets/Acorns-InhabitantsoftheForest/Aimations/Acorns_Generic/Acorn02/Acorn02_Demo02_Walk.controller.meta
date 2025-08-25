@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 534fd54b1dcd67c4591b51e7416da81f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209077
+  packageName: Acorns - Inhabitants of the Forest
+  packageVersion: 2.0.0
+  assetPath: Assets/Acorns-InhabitantsoftheForest/Aimations/Acorns_Generic/Acorn02/Acorn02_Demo02_Walk.controller
+  uploadId: 730596

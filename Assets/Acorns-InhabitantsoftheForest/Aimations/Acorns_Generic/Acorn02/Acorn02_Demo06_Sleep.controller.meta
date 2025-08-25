@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 67577f0ed9dc1574b8dc5a7240fe4e34
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209077
+  packageName: Acorns - Inhabitants of the Forest
+  packageVersion: 2.0.0
+  assetPath: Assets/Acorns-InhabitantsoftheForest/Aimations/Acorns_Generic/Acorn02/Acorn02_Demo06_Sleep.controller
+  uploadId: 730596
