@@ -9,12 +9,11 @@ public class Explosion : MonoBehaviour
     [Header("˜A‘±‚µ‚Äo‚·‰Š‚ÌŠÔŠu")]
     public float Spacing;//ŠÔŠu
 
-    [Header("¶¬ˆÊ’u")]
-    public Vector3 Bomb;
+
 
     void Start()
     {
-        Instantiate(CellPrefab, Bomb, Quaternion.identity);
+        Instantiate(CellPrefab, transform.position, Quaternion.identity);
         
     }
 
