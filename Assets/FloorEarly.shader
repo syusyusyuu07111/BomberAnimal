@@ -6,7 +6,7 @@ Shader "Universal Render Pipeline/Custom/FloorEarly"
     }
     SubShader
     {
-        // 床をマスク(1999)より早く描く
+        // 床をマスク(1999)より早く描く 前に描画しないと床がきえてしまう
         Tags { "RenderType"="Opaque" "Queue"="Geometry-2" } // = 1998
 
         Pass
