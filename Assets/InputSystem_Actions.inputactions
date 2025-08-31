@@ -485,7 +485,18 @@
                 {
                     "name": "",
                     "id": "8dd6903c-240e-43f1-ab70-080881480ecc",
-                    "path": "",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d448aed5-d7a7-4ede-ad93-e485da479d94",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
