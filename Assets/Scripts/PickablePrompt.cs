@@ -11,6 +11,9 @@ public class PickablePrompt : MonoBehaviour
     public float labelScale = 0.0022f;  // ワールド空間Canvasのスケール
     public int fontSize = 28;
 
+    [Header("フォント設定")]
+    [SerializeField] TMP_FontAsset fontAsset; // ← Inspectorで割り当て推奨
+
     Canvas worldCanvas;
     TextMeshProUGUI tmp;
     Collider col;
@@ -56,15 +59,37 @@ public class PickablePrompt : MonoBehaviour
         var tObj = new GameObject("Text");
         tObj.transform.SetParent(bg.transform, false);
         var tRect = tObj.AddComponent<RectTransform>();
-        tRect.anchorMin = Vector2.zero; tRect.anchorMax = Vector2.one;
-        tRect.offsetMin = Vector2.zero; tRect.offsetMax = Vector2.zero;
+        tRect.anchorMin = Vector2.zero;
+        tRect.anchorMax = Vector2.one;
+        tRect.offsetMin = Vector2.zero;
+        tRect.offsetMax = Vector2.zero;
 
         tmp = tObj.AddComponent<TextMeshProUGUI>();
+
+        // フォント設定（Inspector指定 > TMP_Settings デフォルト）
+        if (fontAsset != null)
+        {
+            tmp.font = fontAsset;
+        }
+        else if (TMP_Settings.defaultFontAsset != null)
+        {
+            tmp.font = TMP_Settings.defaultFontAsset;
+        }
+        else
+        {
+            Debug.LogError("TextMeshPro フォントが設定されていません。Inspectorで指定してください。");
+        }
+
         tmp.alignment = TextAlignmentOptions.Center;
         tmp.fontSize = fontSize;
         tmp.color = Color.white;
-        tmp.outlineWidth = 0.2f;
-        tmp.outlineColor = new Color(0, 0, 0, 0.9f);
+
+        // fontSharedMaterial があるときだけアウトラインを設定
+        if (tmp.fontSharedMaterial != null)
+        {
+            tmp.outlineWidth = 0.2f;
+            tmp.outlineColor = new Color(0, 0, 0, 0.9f);
+        }
     }
 
     void BillboardToCamera()
