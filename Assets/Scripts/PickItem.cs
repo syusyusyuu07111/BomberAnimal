@@ -7,10 +7,17 @@ public class PickItem : MonoBehaviour
     public Transform Character;//キャラの位置
     public Transform Item;//アイテムの位置
     public float pickdistance = 1.5f;//拾える距離
-    public TextMeshProUGUI TMP;
+    public TextMeshPro TMP;
+    public Transform Bomb;//爆弾の位置　爆弾の上にテキスト表示
+    Camera Cam;
 
+    private void Start()
+    {
+        //メインカメラ
+        Cam = Camera.main;
+        TMP.gameObject.SetActive(false);
+    }
 
-    
     void Update()
     {
         if (Item == null || Character == null) return;
@@ -22,8 +29,10 @@ public class PickItem : MonoBehaviour
 
             if(distance<=pickdistance)
             {
-
+                
                 TMP.gameObject.SetActive(true);
+                //テキストがカメラの方向を見るようにする（正面に合わせる）
+                transform.LookAt(transform.position + Cam.transform.forward);
 
                 Debug.Log("拾える距離");
             }
