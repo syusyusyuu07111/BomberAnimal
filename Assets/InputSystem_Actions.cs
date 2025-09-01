@@ -182,7 +182,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PichThrow"",
+                    ""name"": ""PickThrow"",
                     ""type"": ""Button"",
                     ""id"": ""cd3752c0-c5b3-458c-978b-2b3f4fff1a76"",
                     ""expectedControlType"": """",
@@ -606,7 +606,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PichThrow"",
+                    ""action"": ""PickThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -617,7 +617,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PichThrow"",
+                    ""action"": ""PickThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1215,7 +1215,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_PickItem = m_Player.FindAction("PickItem", throwIfNotFound: true);
-        m_Player_PichThrow = m_Player.FindAction("PichThrow", throwIfNotFound: true);
+        m_Player_PickThrow = m_Player.FindAction("PickThrow", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1319,7 +1319,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_PickItem;
-    private readonly InputAction m_Player_PichThrow;
+    private readonly InputAction m_Player_PickThrow;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1372,9 +1372,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @PickItem => m_Wrapper.m_Player_PickItem;
         /// <summary>
-        /// Provides access to the underlying input action "Player/PichThrow".
+        /// Provides access to the underlying input action "Player/PickThrow".
         /// </summary>
-        public InputAction @PichThrow => m_Wrapper.m_Player_PichThrow;
+        public InputAction @PickThrow => m_Wrapper.m_Player_PickThrow;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1431,9 +1431,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @PickItem.started += instance.OnPickItem;
             @PickItem.performed += instance.OnPickItem;
             @PickItem.canceled += instance.OnPickItem;
-            @PichThrow.started += instance.OnPichThrow;
-            @PichThrow.performed += instance.OnPichThrow;
-            @PichThrow.canceled += instance.OnPichThrow;
+            @PickThrow.started += instance.OnPickThrow;
+            @PickThrow.performed += instance.OnPickThrow;
+            @PickThrow.canceled += instance.OnPickThrow;
         }
 
         /// <summary>
@@ -1475,9 +1475,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @PickItem.started -= instance.OnPickItem;
             @PickItem.performed -= instance.OnPickItem;
             @PickItem.canceled -= instance.OnPickItem;
-            @PichThrow.started -= instance.OnPichThrow;
-            @PichThrow.performed -= instance.OnPichThrow;
-            @PichThrow.canceled -= instance.OnPichThrow;
+            @PickThrow.started -= instance.OnPickThrow;
+            @PickThrow.performed -= instance.OnPickThrow;
+            @PickThrow.canceled -= instance.OnPickThrow;
         }
 
         /// <summary>
@@ -1849,12 +1849,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPickItem(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "PichThrow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "PickThrow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPichThrow(InputAction.CallbackContext context);
+        void OnPickThrow(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

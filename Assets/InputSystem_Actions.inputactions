@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PichThrow",
+                    "name": "PickThrow",
                     "type": "Button",
                     "id": "cd3752c0-c5b3-458c-978b-2b3f4fff1a76",
                     "expectedControlType": "",
@@ -520,7 +520,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PichThrow",
+                    "action": "PickThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -531,7 +531,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PichThrow",
+                    "action": "PickThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

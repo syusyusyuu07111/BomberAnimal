@@ -10,6 +10,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using static UnityEditor.Progress;
 
 public class PickItem : MonoBehaviour
 {
@@ -24,6 +25,17 @@ public class PickItem : MonoBehaviour
     InputSystem_Actions input;//inputsystemの生成したクラス
     public float sucktime = 0.5f;
     public bool pick;//持ってる状態かを判定する
+
+    //投げるときの設定
+    [Header("投げるときの設定")]
+    [SerializeField] float throwSpeed = 12f;      // 前方速度（m/s）
+    [SerializeField] float throwUpward = 1.5f;    // 少し上に持ち上げる
+    [SerializeField] float spinStrength = 3f;     // 回転
+    [SerializeField] float rePickDelay = 0.25f;   // 投げた直後は拾えない猶予
+
+    [SerializeField, Range(0f, 60f)] float throwPitchDeg = 20f; 
+
+    Rigidbody Itemrb;
 
 
     private void Start()
@@ -46,6 +58,29 @@ public class PickItem : MonoBehaviour
         if(pick)//持ってる状態のとき
         {
             TMP.gameObject.SetActive(false);
+
+            //爆弾投げる処理
+                if(input.Player.PickThrow.WasPerformedThisFrame())
+            {
+                Item.SetParent(null, true);
+                Itemrb=Item.GetComponent<Rigidbody>();
+                Itemrb.useGravity = true;
+
+                //物理付けて速度付与する
+                Itemrb.isKinematic = false;
+
+                // カメラ前方を「pitch度」だけ上に傾ける
+                Transform t = Cam ? Cam.transform : transform;
+                Vector3 dir = t.forward;
+                dir = Quaternion.AngleAxis(-throwPitchDeg, t.right) * dir; // 上向きにピッチ
+
+                // 初速を与える（これだけで重力で勝手に放物線）
+                Itemrb.linearVelocity = dir.normalized * throwSpeed;
+
+
+
+
+            }
         }
 
         if (Item == null || Character == null) return;
