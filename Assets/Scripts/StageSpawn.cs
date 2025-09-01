@@ -1,75 +1,77 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class StageSpawn : MonoBehaviour
 {
-    [Header("•K{")]
-    public GameObject boxPrefab;                 // ” ƒvƒŒƒnƒuiƒAƒ^ƒbƒ`j
+    [Header("è¤‡è£½ã™ã‚‹ãƒ—ãƒ¬ãƒãƒ–")]
+    public GameObject boxPrefab;
 
-    // X=‰¡(20), Y=‚‚³(10), Z=c(50)
-    [Header("ŒÂ”iX=‰¡ / Y=‚‚³ / Z=cj")]
-    public Vector3Int count = new Vector3Int(20, 10, 50);
+    [Header("å€‹æ•°ï¼ˆæ¨ª=X / ç¸¦=Z / é«˜ã•=Yï¼‰")]
+    [Min(1)] public int countX = 20; // æ¨ª
+    [Min(1)] public int countZ = 50; // ç¸¦
+    [Min(1)] public int countY = 10; // é«˜ã•
 
-    [Header("ƒZƒ‹ƒTƒCƒYi0‚È‚ç©“®„’èFRenderer¨Colliderj")]
-    public Vector3 cellSizeOverride = Vector3.zero;
+    [Header("ã‚»ãƒ«ã‚µã‚¤ã‚ºï¼ˆ0ãªã‚‰è‡ªå‹•æ¨å®šï¼‰")]
+    public Vector3 cellSizeOverride = Vector3.zero; // ä¾‹: (1,1,1) ã‚’å…¥ã‚Œã‚‹ã¨ç¢ºå®Ÿã«éš™é–“ã‚¼ãƒ­
 
-    [Header("”z’uƒIƒvƒVƒ‡ƒ“")]
-    public Transform parent;                     // eB–¢w’è‚È‚ç‚±‚ÌƒIƒuƒWƒFƒNƒg”z‰º
-    public bool centerGrid = true;               // ƒOƒŠƒbƒh‚ğŒ´“_’†S‚É”z’u
+    [Header("ã©ã£ã¡å‘ãã«ä¼¸ã°ã™ï¼Ÿï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰è»¸åŸºæº–ï¼‰")]
+    public bool toNegativeX = false; // å·¦ã¸ä¼¸ã°ã—ãŸã„ãªã‚‰ true
+    public bool toNegativeZ = false; // æ‰‹å‰(âˆ’Z)ã¸ä¼¸ã°ã—ãŸã„ãªã‚‰ true
+    public bool toNegativeY = false; // ä¸‹ã¸ç©ã¿ãŸã„ãªã‚‰ true
+
+    [Header("ã¶ã‚‰ä¸‹ã’å…ˆï¼ˆæœªæŒ‡å®šãªã‚‰ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé…ä¸‹ï¼‰")]
+    public Transform parent;
 
     void Start()
     {
         if (!boxPrefab)
         {
-            Debug.LogError("StageSpawn: boxPrefab ‚ª–¢İ’è‚Å‚·B");
+            Debug.LogError("StageSpawn: boxPrefab ãŒæœªè¨­å®šã§ã™ã€‚");
             return;
         }
 
-        // ƒZƒ‹ƒTƒCƒYŒˆ’è
+        // ã‚»ãƒ«ã‚µã‚¤ã‚ºæ±ºå®š
         Vector3 cell = (cellSizeOverride != Vector3.zero) ? cellSizeOverride : GuessCellSize(boxPrefab);
-        if (cell == Vector3.zero) cell = Vector3.one; // ”O‚Ì‚½‚ß
+        if (cell == Vector3.zero) cell = Vector3.one; // å¿µã®ãŸã‚
 
-        // Œ´“_iŠJnˆÊ’uj
-        Vector3 origin = transform.position;
-        if (centerGrid)
+        // é€²ã‚€æ–¹å‘ï¼ˆÂ±ï¼‰
+        float sx = toNegativeX ? -1f : 1f;
+        float sz = toNegativeZ ? -1f : 1f;
+        float sy = toNegativeY ? -1f : 1f;
+
+        Vector3 origin = transform.position;                  // åŸºæº–ç‚¹
+        Quaternion rot = boxPrefab.transform.rotation;        // å›è»¢ã¯ãƒ—ãƒ¬ãƒãƒ–æº–æ‹ 
+        Transform p = parent ? parent : transform;            // è¦ª
+
+        // ç”Ÿæˆãƒ«ãƒ¼ãƒ—ï¼šåŸç‚¹ã‹ã‚‰ X/Z/Y ã«ç­‰é–“éš”ã§é…ç½®ï¼ˆéš™é–“ã‚¼ãƒ­ï¼‰
+        for (int y = 0; y < countY; y++)
         {
-            origin -= new Vector3(
-                (count.x - 1) * cell.x * 0.5f,
-                (count.y - 1) * cell.y * 0.5f,
-                (count.z - 1) * cell.z * 0.5f
-            );
-        }
-
-        Transform p = parent ? parent : transform;
-
-        // ¶¬ƒ‹[ƒviX=‰¡, Y=‚‚³, Z=cj
-        for (int y = 0; y < count.y; y++)
-        {
-            for (int z = 0; z < count.z; z++)
+            for (int z = 0; z < countZ; z++)
             {
-                for (int x = 0; x < count.x; x++)
+                for (int x = 0; x < countX; x++)
                 {
-                    Vector3 pos = origin + new Vector3(x * cell.x, y * cell.y, z * cell.z);
-                    Instantiate(boxPrefab, pos, Quaternion.identity, p);
+                    Vector3 pos = origin +
+                                  new Vector3(sx * x * cell.x,
+                                              sy * y * cell.y,
+                                              sz * z * cell.z);
+                    Instantiate(boxPrefab, pos, rot, p);
                 }
             }
         }
 
-        Debug.Log($"StageSpawn: ¶¬Š®—¹ {count.x}~{count.y}~{count.z} = {count.x * count.y * count.z} ŒÂ, ƒZƒ‹={cell}");
+        Debug.Log($"StageSpawn: {countX}Ã—{countY}Ã—{countZ} å€‹ç”Ÿæˆ / ã‚»ãƒ«={cell} / åŸºæº–={origin}");
     }
 
-    // ƒvƒŒƒnƒu‚ÌŒ©‚½–ÚƒTƒCƒY‚ğ„’èiRenderer‚ª–³‚¯‚ê‚ÎColliderj
+    // ãƒ—ãƒ¬ãƒãƒ–ã®è¦‹ãŸç›®ã‚µã‚¤ã‚ºï¼ˆRendererâ†’Colliderï¼‰ã‚’æ¨å®šã—ã¦ã‚»ãƒ«ã¨ã™ã‚‹
     Vector3 GuessCellSize(GameObject prefab)
     {
-        GameObject tmp = Instantiate(prefab, new Vector3(1e6f, 1e6f, 1e6f), Quaternion.identity);
+        GameObject tmp = Instantiate(prefab, new Vector3(1e6f, 1e6f, 1e6f), prefab.transform.rotation);
         tmp.hideFlags = HideFlags.HideAndDontSave;
 
         Bounds b = new Bounds(tmp.transform.position, Vector3.zero);
 
         var rends = tmp.GetComponentsInChildren<Renderer>();
         if (rends != null && rends.Length > 0)
-        {
             foreach (var r in rends) b.Encapsulate(r.bounds);
-        }
         else
         {
             var cols = tmp.GetComponentsInChildren<Collider>();
