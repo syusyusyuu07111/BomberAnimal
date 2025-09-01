@@ -1,77 +1,97 @@
-using System.Collections;
+//æŒã£ã¦ã‚‹é–“ã¯ãƒ†ã‚­ã‚¹ãƒˆéè¡¨ç¤º
+//æŒã£ã¦ãªã„ã¨ãã‹ã¤çˆ†å¼¾ã®è¿‘ãã«ã„ã‚‹ã¨ãã¯ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
+//ãã‚Œä»¥å¤–ã¯å…¨éƒ¨éè¡¨ç¤º
+
+
+
 using TMPro;
 using UnityEngine;
+
+using System.Collections;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class PickItem : MonoBehaviour
 {
-    [Header("QÆ")]
-    public Transform Character;//ƒLƒƒƒ‰‚ÌˆÊ’u
-    public Transform Item;//ƒAƒCƒeƒ€‚ÌˆÊ’u
+    [Header("å‚ç…§")]
+    public Transform Character;//ã‚­ãƒ£ãƒ©ã®ä½ç½®
+    public Transform Item;//ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®
     public Transform handpos;
-    public float pickdistance = 1.5f;//E‚¦‚é‹——£
+    public float pickdistance = 1.5f;//æ‹¾ãˆã‚‹è·é›¢
     public TextMeshPro TMP;
-    public Transform Bomb;//”š’e‚ÌˆÊ’u@”š’e‚Ìã‚ÉƒeƒLƒXƒg•\¦
+    public Transform Bomb;//çˆ†å¼¾ã®ä½ç½®ã€€çˆ†å¼¾ã®ä¸Šã«ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
     Camera Cam;
-    InputSystem_Actions input;//inputsystem‚Ì¶¬‚µ‚½ƒNƒ‰ƒX
+    InputSystem_Actions input;//inputsystemã®ç”Ÿæˆã—ãŸã‚¯ãƒ©ã‚¹
     public float sucktime = 0.5f;
-    
+    public bool pick;//æŒã£ã¦ã‚‹çŠ¶æ…‹ã‹ã‚’åˆ¤å®šã™ã‚‹
+
 
     private void Start()
     {
-        //ƒƒCƒ“ƒJƒƒ‰
+        //ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©
         Cam = Camera.main;
         TMP.gameObject.SetActive(false);
         input = new InputSystem_Actions();
 
-        input.Player.Enable();//ƒAƒNƒVƒ‡ƒ“ƒ}ƒbƒv—LŒø‰»‚É‚·‚é
+        input.Player.Enable();//ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒãƒƒãƒ—æœ‰åŠ¹åŒ–ã«ã™ã‚‹
 
-     
+        pick = false;
+
+
     }
 
     void Update()
     {
+
+        if(pick)//æŒã£ã¦ã‚‹çŠ¶æ…‹ã®ã¨ã
+        {
+            TMP.gameObject.SetActive(false);
+        }
+
         if (Item == null || Character == null) return;
         {
-            //‹——£‚ğŒvZ
+            //è·é›¢ã‚’è¨ˆç®—
             float distance = Vector3.Distance(Character.position, Item.position);
 
-           // Debug.Log("ƒLƒƒƒ‰‚ÆƒAƒCƒeƒ€‚Ì‹——£" + distance);
+            // Debug.Log("ã‚­ãƒ£ãƒ©ã¨ã‚¢ã‚¤ãƒ†ãƒ ã®è·é›¢" + distance);
 
-            if(distance<=pickdistance)
+            if (distance <= pickdistance)//è·é›¢è¿‘ã„ã¨ã
             {
+
                 
-                TMP.gameObject.SetActive(true);
-                //ƒeƒLƒXƒg‚ªƒJƒƒ‰‚Ì•ûŒü‚ğŒ©‚é‚æ‚¤‚É‚·‚éi³–Ê‚É‡‚í‚¹‚éj
+                //ãƒ†ã‚­ã‚¹ãƒˆãŒã‚«ãƒ¡ãƒ©ã®æ–¹å‘ã‚’è¦‹ã‚‹ã‚ˆã†ã«ã™ã‚‹ï¼ˆæ­£é¢ã«åˆã‚ã›ã‚‹ï¼‰
                 transform.LookAt(transform.position + Cam.transform.forward);
 
-                
 
-                if(input.Player.PickItem.WasPerformedThisFrame())
+
+                if (input.Player.PickItem.WasPerformedThisFrame())
                 {
-                    //”š’e‚ğˆø‚«Šñ‚¹‚é
-                    Debug.Log("ˆø‚«Šñ‚¹‚éƒ{ƒ^ƒ“‰Ÿ‚³‚ê‚½");
+                    //çˆ†å¼¾ã‚’å¼•ãå¯„ã›ã‚‹
+                    Debug.Log("å¼•ãå¯„ã›ã‚‹ãƒœã‚¿ãƒ³æŠ¼ã•ã‚ŒãŸ");
 
                     StartCoroutine(Suckcoroutine());
+
+                    pick = true;
 
 
 
                 }
 
 
-
-
-
-                Debug.Log("E‚¦‚é‹——£");
+                Debug.Log("æ‹¾ãˆã‚‹è·é›¢");
             }
 
-            
+            if (!pick&& distance <= pickdistance)//æŒã£ã¦ãªã„çŠ¶æ…‹ã®ã¨ã
+            {
+                TMP.gameObject.SetActive(true);
+            }
+
             if (distance >= pickdistance)
             {
 
 
-                TMP.gameObject.SetActive(false);
-                Debug.Log("E‚¦‚È‚¢‹——£");
+               
+                Debug.Log("æ‹¾ãˆãªã„è·é›¢");
             }
 
 
@@ -79,14 +99,16 @@ public class PickItem : MonoBehaviour
         }
 
 
-       
+
 
     }
+
+
     IEnumerator Suckcoroutine()
     {
-      
+
         TMP.gameObject.SetActive(false);
-        //ŠJnAI—¹‚ÌˆÊ’uAŠp“x
+        //é–‹å§‹ã€çµ‚äº†ã®ä½ç½®ã€è§’åº¦
         Vector3 startpos = Item.position;
         Vector3 endpos = handpos.position;
 
@@ -95,27 +117,28 @@ public class PickItem : MonoBehaviour
 
         float t = 0f, dur = Mathf.Max(0.01f, sucktime);
 
-        while(t<1f)
+        while (t < 1f)
         {
 
-            //‰½•b‚Å1f‚É‚È‚é‚©Œˆ‚ß‚é
+            //ä½•ç§’ã§1fã«ãªã‚‹ã‹æ±ºã‚ã‚‹
             t += Time.deltaTime / dur;
             Item.position = Vector3.Lerp(startpos, endpos, t);
             Item.rotation = Quaternion.Slerp(startrot, endrot, t);
             yield return null;
         }
 
-        //ƒJƒ`ƒb‚ÆƒZƒbƒg‚·‚é eqŠÖŒWì‚Á‚Älocal0
+        //ã‚«ãƒãƒƒã¨ã‚»ãƒƒãƒˆã™ã‚‹ è¦ªå­é–¢ä¿‚ä½œã£ã¦local0
         Item.SetParent(handpos);
         Item.localPosition = Vector3.zero;
         Item.localRotation = Quaternion.identity;
 
-        TMP.gameObject.SetActive(false);
+     
 
 
 
     }
 
+    
 
 
 }
