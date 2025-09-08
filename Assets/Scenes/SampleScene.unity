@@ -311,8 +311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413dc9a321d0e948a6fc79dae1565b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 0}
+  muzzle: {fileID: 1205120097}
   projectilePrefab: {fileID: 2556671552678030747, guid: f0e925db94fa1634d8f97a7f7c2c13fc, type: 3}
+  Bomb: {fileID: 0}
   projectileSpeed: 20
   cooldown: 0.3
   aimCamera: {fileID: 330585545}
@@ -1942,9 +1943,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomb3
       objectReference: {fileID: 0}
+    - target: {fileID: 1204744668851003682, guid: 71afc2d8bedb42b479ffdcd6b2ea34c6, type: 3}
+      propertyPath: m_TagString
+      value: Bomb
+      objectReference: {fileID: 0}
     - target: {fileID: 2014178068869462936, guid: 71afc2d8bedb42b479ffdcd6b2ea34c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.5
+      value: 1.76
       objectReference: {fileID: 0}
     - target: {fileID: 2014178068869462936, guid: 71afc2d8bedb42b479ffdcd6b2ea34c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1952,7 +1957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2014178068869462936, guid: 71afc2d8bedb42b479ffdcd6b2ea34c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 13.22
       objectReference: {fileID: 0}
     - target: {fileID: 2014178068869462936, guid: 71afc2d8bedb42b479ffdcd6b2ea34c6, type: 3}
       propertyPath: m_LocalRotation.w

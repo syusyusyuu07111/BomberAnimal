@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour
@@ -6,6 +7,7 @@ public class Attack : MonoBehaviour
     [Header("References")]
     public Transform muzzle;
     public GameObject projectilePrefab;
+    public GameObject Bomb;
 
     [Header("Fire Settings")]
     public float projectileSpeed = 20f;
@@ -71,5 +73,17 @@ public class Attack : MonoBehaviour
         }
 
         Debug.Log("Attack: fired toward camera aim.");
+    }
+    //銃弾と爆弾が当たった時の処理
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision == null) return;
+       if(collision.collider.CompareTag("Bomb"))
+        {
+            Debug.Log("爆弾に当たった");
+
+
+        }
+
     }
 }
