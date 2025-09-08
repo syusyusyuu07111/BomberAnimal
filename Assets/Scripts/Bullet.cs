@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     {
         if(collision.collider.CompareTag("Bomb"))
         {
+            Debug.Log("”š’e‚Æ“–‚½‚é");
 
         }
     }
