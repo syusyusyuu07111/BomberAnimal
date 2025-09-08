@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8014728391314008822}
   - component: {fileID: 7157491731565191872}
   - component: {fileID: 8174121337988141326}
-  - component: {fileID: 7785137730319061702}
+  - component: {fileID: 6340057188119561006}
   m_Layer: 2
   m_Name: Capsule 1
   m_TagString: Untagged
@@ -139,7 +139,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7785137730319061702
+--- !u!114 &6340057188119561006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,3 +152,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
+  Power: 5
+  radius: 10
