@@ -3,19 +3,39 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float  lifetime = 5f;
+    public float lifetime = 5f;
+    public float Power;
+    public float radius;//爆風の範囲
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Destroy(gameObject, lifetime);
+
+
+
+
     }
 
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Bomb"))
+        if (collision.collider.CompareTag("Bomb"))
         {
-            Debug.Log("爆弾と当たる");
+            Debug.Log("爆弾と当たるるる");
+            //爆弾に爆発範囲を取得 爆弾と当たっているコライダーを取得
+            Collider[] colliders = Physics.OverlapSphere(collision.transform.position, 20f);
+            //範囲内のオブジェクトを探して爆破
+            foreach(Collider Hitcollider in colliders)
+            {
+                Rigidbody rb = Hitcollider.attachedRigidbody;
+                if(rb !=null)
+                {
+                    rb.AddExplosionForce(Power, transform.position, radius, 3f, ForceMode.Impulse);
+                }
+
+            }
+
+
 
         }
     }
