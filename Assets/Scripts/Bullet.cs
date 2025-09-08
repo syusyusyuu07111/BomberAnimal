@@ -6,12 +6,18 @@ public class Bullet : MonoBehaviour
     public float lifetime = 5f;
     public float Power = 5.0f;
     public float radius = 10.0f;//”š•—‚Ì”ÍˆÍ
+    public float Speed = 50.0f;
+
+    public Vector3 movedir;//”ò‚Î‚·•ûŒü
 
     void Start()
     {
         Destroy(gameObject, lifetime);
     }
+    private void Update()
+    {
 
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Bomb"))
