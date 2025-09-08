@@ -448,12 +448,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 1205120097}
-  projectilePrefab: {fileID: 3282847264123297586, guid: 862ab4bfcff2af9499871cedb13e3025, type: 3}
-  Bomb: {fileID: 0}
-  projectileSpeed: 20
+  projectilePrefab: {fileID: 7254724505758029929, guid: 05816b79fbbf80743ab575744e7df7b2, type: 3}
   cooldown: 0.3
-  aimCamera: {fileID: 330585545}
   aimDistance: 100
+  aimCamera: {fileID: 330585545}
   aimMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -892,7 +890,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d91573dcd0c01fc42b29f4a8974b0cc1, type: 3}
   m_Name: 
@@ -1235,7 +1233,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902102698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c68c69b40a7fd6148a18ea4e1ef26987, type: 3}
   m_Name: 

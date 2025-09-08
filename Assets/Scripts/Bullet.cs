@@ -10,21 +10,38 @@ public class Bullet : MonoBehaviour
     public float Speed = 50.0f;
 
     public Vector3 movedir;//”ò‚Î‚·•ûŒü
+    public Vector3 Transform;//¶¬‚³‚ê‚½êŠ
+
+    public bool CanMove = false;
     void Start()
     {
         Destroy(gameObject, lifetime);
         movedir = Camera.main.transform.forward.normalized;//¶¬‚³‚ê‚½uŠÔ‚É•ûŒü‚ğŒˆ‚ß‚é
+        Transform = transform.position;
     }
-
     private void Awake()
     {
         StartCoroutine(Attack(3f));
     }
+
+    public void Update()
+    {
+        if(!CanMove)
+        {
+            Transform = transform.position;
+        }
+        if(CanMove)
+        {
+            transform.position += movedir * Speed * Time.deltaTime;
+        }
+    }
+
     IEnumerator Attack(float delay)//3•b‘Ò‚Á‚Ä‚©‚ç”­Ë
     {
         yield return new WaitForSeconds(delay);
-        transform.position += movedir * Speed * Time.deltaTime;
+        CanMove = true;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Bomb"))
