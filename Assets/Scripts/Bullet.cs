@@ -11,8 +11,11 @@ public class Bullet : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.collider.CompareTag("Bomb"))
+        {
+
+        }
     }
 }
