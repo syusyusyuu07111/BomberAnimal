@@ -1,22 +1,29 @@
+using System.Collections;
 using UnityEditor.Rendering.Analytics;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float lifetime = 5f;
+    public float lifetime = 20f;
     public float Power = 5.0f;
     public float radius = 10.0f;//”š•—‚Ì”ÍˆÍ
     public float Speed = 50.0f;
 
     public Vector3 movedir;//”ò‚Î‚·•ûŒü
-
     void Start()
     {
         Destroy(gameObject, lifetime);
+        movedir = Camera.main.transform.forward.normalized;//¶¬‚³‚ê‚½uŠÔ‚É•ûŒü‚ğŒˆ‚ß‚é
     }
-    private void Update()
-    {
 
+    private void Awake()
+    {
+        StartCoroutine(Attack(3f));
+    }
+    IEnumerator Attack(float delay)//3•b‘Ò‚Á‚Ä‚©‚ç”­Ë
+    {
+        yield return new WaitForSeconds(delay);
+        transform.position += movedir * Speed * Time.deltaTime;
     }
     private void OnCollisionEnter(Collision collision)
     {
