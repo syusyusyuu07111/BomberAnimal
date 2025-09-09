@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
 
 
     {
-        if(!other.CompareTag("Bomb"))
+        if(other.CompareTag("Bomb"))
         {
             Debug.Log("”š’e‚Æ“–‚½‚é‚é‚é");
 

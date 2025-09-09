@@ -9825,7 +9825,6 @@ GameObject:
   - component: {fileID: 7319062950081714047}
   - component: {fileID: 1719583959443498498}
   - component: {fileID: 7616273860974657247}
-  - component: {fileID: 3880939595932768335}
   - component: {fileID: 6962446295159751822}
   - component: {fileID: 8964247538046694180}
   m_Layer: 0
@@ -14653,33 +14652,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!54 &3880939595932768335
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7254724505758029929}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!65 &6962446295159751822
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14720,3 +14692,4 @@ MonoBehaviour:
   movedir: {x: 0, y: 0, z: 0}
   Transform: {x: 0, y: 0, z: 0}
   CanMove: 0
+  ExplosionCenter: {x: 0, y: 0, z: 0}

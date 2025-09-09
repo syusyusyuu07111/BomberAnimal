@@ -18,7 +18,9 @@ public class InputTest : MonoBehaviour
     public Transform groundCheck;         // 未設定でもOK（フォールバックあり）
     public float groundRadius = 0.2f;
     public LayerMask groundMask = ~0;
-    private bool jumpQueued;
+    private bool jumpQueued;              // 入力キュー
+    private bool jumpConsumed;            // 同一滞空中に1回だけ許可（着地で解除）
+    private bool prevGrounded;            // 前Fixedの接地状態
 
     [Header("BlendTree (Idle<->Move)")]
     public string blendParam = "Blend";   // Animator 1D BlendTree のパラメータ名（Idle=0, Move=1）
@@ -58,16 +60,13 @@ public class InputTest : MonoBehaviour
         inputAction.Player.Move.Enable();
         inputAction.Player.Jump.Enable();
 
-        inputAction.Player.Jump.started += OnJump;
+        // 二重発火を避けるため performed のみ
         inputAction.Player.Jump.performed += OnJump;
-        inputAction.Player.Jump.canceled += OnJump;
     }
 
     private void OnDisable()
     {
-        inputAction.Player.Jump.started -= OnJump;
         inputAction.Player.Jump.performed -= OnJump;
-        inputAction.Player.Jump.canceled -= OnJump;
         inputAction.Disable();
     }
 
@@ -85,6 +84,12 @@ public class InputTest : MonoBehaviour
         Vector3 checkPos = groundCheck ? groundCheck.position : transform.position + Vector3.down * 0.6f;
         bool isGrounded = Physics.CheckSphere(checkPos, groundRadius, groundMask, QueryTriggerInteraction.Ignore);
 
+        // ☆ 着地した瞬間に二段ジャンプロック解除
+        if (isGrounded && !prevGrounded)
+        {
+            jumpConsumed = false;
+        }
+
         // --- カメラ基準の移動ベクトル ---
         Vector3 f = cam ? Flat(cam.forward) : Flat(transform.forward);
         Vector3 r = cam ? Flat(cam.right) : Flat(transform.right);
@@ -96,9 +101,15 @@ public class InputTest : MonoBehaviour
         // 入力ほぼゼロなら水平速度を止める（任意）
         if (moveInput.sqrMagnitude < 0.0001f)
         {
-            var v = rb.linearVelocity; // Unity 6
+#if UNITY_6000_0_OR_NEWER
+            var v = rb.linearVelocity;
             v.x = 0f; v.z = 0f;
             rb.linearVelocity = v;
+#else
+            var v = rb.velocity;
+            v.x = 0f; v.z = 0f;
+            rb.velocity = v;
+#endif
         }
 
         // --- 向き（回転）：移動中は進行方向、停止中はオプションでカメラ向き ---
@@ -123,13 +134,21 @@ public class InputTest : MonoBehaviour
 
         lastRbPos = rb.position;
 
-        // --- ジャンプ ---
-        if (jumpQueued && isGrounded)
+        // --- ジャンプ：接地中 かつ 未消費 のときだけ1回 ---
+        if (jumpQueued && isGrounded && !jumpConsumed)
         {
+#if UNITY_6000_0_OR_NEWER
             var v = rb.linearVelocity; v.y = 0f; rb.linearVelocity = v;
+#else
+            var v = rb.velocity; v.y = 0f; rb.velocity = v;
+#endif
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpConsumed = true;   // 空中ではもう跳べない
         }
+
+        // 入力は毎Fixedで必ず消費
         jumpQueued = false;
+        prevGrounded = isGrounded;
     }
 
     private static Vector3 Flat(Vector3 v) // 水平面に投影して正規化
@@ -140,7 +159,8 @@ public class InputTest : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) jumpQueued = true;
+        if (ctx.performed)
+            jumpQueued = true;
     }
 
     private void OnDrawGizmosSelected()
