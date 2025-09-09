@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
     public Vector3 Transform;//生成された場所
 
     public bool CanMove = false;
+
+    public Vector3 ExplosionCenter;
     void Start()
     {
         Destroy(gameObject, lifetime);
@@ -42,13 +44,17 @@ public class Bullet : MonoBehaviour
         CanMove = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
+
+
     {
-        if (collision.collider.CompareTag("Bomb"))
+        if(!other.CompareTag("Bomb"))
         {
             Debug.Log("爆弾と当たるるる");
+
+            Vector3 ExplosionCenter = other.transform.position;
             //爆弾に爆発範囲を取得 爆弾と当たっているコライダーを取得
-            Collider[] colliders = Physics.OverlapSphere(collision.transform.position, 20f);
+            Collider[] colliders = Physics.OverlapSphere(ExplosionCenter, 20f);
             //範囲内のオブジェクトを探して爆破
             foreach (Collider Hitcollider in colliders)
             {

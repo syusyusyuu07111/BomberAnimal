@@ -14695,7 +14695,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -14716,7 +14716,7 @@ MonoBehaviour:
   lifetime: 50
   Power: 5
   radius: 10
-  Speed: 50
+  Speed: 20
   movedir: {x: 0, y: 0, z: 0}
   Transform: {x: 0, y: 0, z: 0}
   CanMove: 0
