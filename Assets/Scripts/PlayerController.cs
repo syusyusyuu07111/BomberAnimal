@@ -22,6 +22,19 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 MoveInput = inputActions.Player.Move.ReadValue<Vector2>();//inputaction move取得
 
+        Vector3 CamForward = CameraTransform.forward;//前方向の座標取得
+        CamForward.y = 0f;
+        CamForward.Normalize();
+
+        Vector3 CamRight = CameraTransform.right;//横方向の座標取得
+        CamRight.y = 0f;
+        CamRight.Normalize();
+
+        Vector3 MoveDir = CamForward * CamForward.y + CamRight * CamRight.y;//進む方向
+
+
+
+
     }
 
 }
