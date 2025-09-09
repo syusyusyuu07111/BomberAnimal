@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public float MoveSpeed =5f; //移動スピード
     [SerializeField] public Transform CameraTransform;//カメラの向き取得
-    void Start()
+    public void Awake()
     {
         inputActions = new InputSystem_Actions();
         rb = GetComponent<Rigidbody>();
@@ -30,9 +31,15 @@ public class PlayerController : MonoBehaviour
         CamRight.y = 0f;
         CamRight.Normalize();
 
-        Vector3 MoveDir = CamForward * CamForward.y + CamRight * CamRight.y;//進む方向
+        Vector3 MoveDir = CamForward * MoveInput.y + CamRight * MoveInput.x;//進む方向
 
+        transform.position += MoveDir.normalized * MoveSpeed * Time.deltaTime;//進む挙動
 
+        if(MoveDir.magnitude>0.0001f)
+        {
+            Vector3 PlayerPos = rb.position + MoveDir.normalized * Time.deltaTime;
+            rb.position = PlayerPos;
+        }
 
 
     }
