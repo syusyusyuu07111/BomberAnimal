@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,11 +13,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform CameraTransform;//カメラの向き取得
     [SerializeField] public float RotateDegPerSec = 720f; //回転スピード
 
+    public bool CanJump;
+    public bool IsGround;
+
+    public float JumpPower=10.0f;
+
+
     public void Awake()
     {
         inputActions = new InputSystem_Actions();
         rb = GetComponent<Rigidbody>();
         rb.constraints |= RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ; //XとZは固定　Yは回転する
+        CanJump = false;
     }
 
     public void OnEnable()
@@ -56,6 +64,25 @@ public class PlayerController : MonoBehaviour
                 rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime //スムーズに回転
             );
             rb.MoveRotation(MoveRot); //Rigidbodyで回転
+        }
+
+    }
+
+    private void Update()
+    {
+        //ジャンプキー押されたらジャンプ
+        if (inputActions.Player.Jump.triggered && CanJump == true)
+        {
+            CanJump = false;
+            rb.AddForce(transform.up * JumpPower, ForceMode.Impulse);
+        }
+    }
+    //床に触れてたらフラグを切り替える
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            CanJump = true;
         }
     }
 }
