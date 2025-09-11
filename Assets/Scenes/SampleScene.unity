@@ -4188,6 +4188,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundHP: 0
   FallCount: 5
+  NoiseSpeed: 0.5
+  Amplitude: 0.5
+  TouchFlag: 0
+  NoiseOffset: 0.1
 --- !u!1 &927602915
 GameObject:
   m_ObjectHideFlags: 0
