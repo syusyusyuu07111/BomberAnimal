@@ -15,9 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public bool CanJump;
     public bool IsGround;
-
     public float JumpPower=10.0f;
-
 
     public void Awake()
     {
@@ -26,12 +24,10 @@ public class PlayerController : MonoBehaviour
         rb.constraints |= RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ; //XとZは固定　Yは回転する
         CanJump = false;
     }
-
     public void OnEnable()
     {
         inputActions.Player.Enable();
     }
-
     public void FixedUpdate()
     {
         Vector2 moveInput = inputActions.Player.Move.ReadValue<Vector2>(); //inputaction move取得
@@ -54,20 +50,15 @@ public class PlayerController : MonoBehaviour
 
         if (MoveDir.magnitude > 0.0001f)
         {
-            // ↓ これもrb.positionを直接書き換えると物理と競合するのでコメントアウト
-            // Vector3 PlayerPos = rb.position + MoveDir.normalized * Time.deltaTime;
-            // rb.position = PlayerPos;
-
             //移動方向にキャラを回転（向きを変える）
             Quaternion PlayerRot = Quaternion.LookRotation(MoveDir, Vector3.up); //進行方向を向く回転
             Quaternion MoveRot = Quaternion.RotateTowards(
-                rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime //スムーズに回転
+                rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime
             );
             rb.MoveRotation(MoveRot); //Rigidbodyで回転
         }
 
     }
-
     private void Update()
     {
         //ジャンプキー押されたらジャンプ
