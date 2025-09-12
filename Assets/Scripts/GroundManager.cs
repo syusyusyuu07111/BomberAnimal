@@ -14,12 +14,17 @@ public class GroundManager : MonoBehaviour
     public bool TouchFlag;
 
     public float NoiseOffset;
+
+    public GameObject[]grounds;//îjâÛÇ≈Ç´ÇÈè∞Çäiî[
+
+    private void Awake()
+    {
+        grounds = GameObject.FindGameObjectsWithTag("Ground");
+    }
     void Start()
     {
         TouchFlag = false;
         Basepos = transform.position;//äÓèÄÇÃà íu
-
-
     }
     public void SetNoise()
     {
@@ -39,22 +44,18 @@ public class GroundManager : MonoBehaviour
             transform.position = new Vector3(Basepos.x+AmplitudeY*sinX, Basepos.y + AmplitudeY * sinY, Basepos.z+AmplitudeY*sinZ);
         }
     }
-
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(FallBlock(FallCount));
             TouchFlag = true;
-
         }
-
     }
     private IEnumerator FallBlock(float delay)
     {
         yield return new WaitForSeconds(delay);
-        //Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
 }
