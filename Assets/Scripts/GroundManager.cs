@@ -19,7 +19,20 @@ public class GroundManager : MonoBehaviour
 
     private void Awake()
     {
+        //シーン内にある床を配列に格納する
         grounds = GameObject.FindGameObjectsWithTag("Ground");
+        Debug.Log("床の数:"+grounds.Length);
+        //ランダムに選んで処理（ランダムな床を破壊可能にする）
+        if(grounds.Length>0)
+        {
+            int pickgound = Random.Range(0, grounds.Length);
+            GameObject hitground = grounds[pickgound];
+            Debug.Log("破壊される床は;"+hitground.name);
+
+            //選ばれたオブジェクトにスクリプトを適応させる
+
+        }
+
     }
     void Start()
     {
