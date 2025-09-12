@@ -6,7 +6,8 @@ public class GroundManager : MonoBehaviour
     [SerializeField] public float GroundHP;
     [SerializeField] public float FallCount=5.0f;
     [SerializeField] public float NoiseSpeed;
-    [SerializeField] public float Amplitude;//—h‚ê•
+    [SerializeField] public float AmplitudeY=0.05f;//—h‚ê•c•ûŒü
+    [SerializeField] public float AmplitudeZ=0.03f;//—h‚ê•c•ûŒü
 
     Vector3 Basepos;//Šî€‚ÌˆÊ’u
 
@@ -31,9 +32,11 @@ public class GroundManager : MonoBehaviour
             //Šp“xŒvZ ƒÆ(t) = ƒÖ t + ƒÓ
             float Angle = Time.time * NoiseSpeed + NoiseOffset;
             //ƒTƒCƒ“‚Ì’l‚ğŒvZ
-            float sin = Mathf.Sin(Angle);
+            float sinX = Mathf.Cos(Angle);//‰¡
+            float sinY = Mathf.Sin(Angle);//ã‰º
+            float sinZ = Mathf.Sin(Angle+Mathf.PI);//‰œ
             //À•W‚ğ”½‰f
-            transform.position = new Vector3(Basepos.x, Basepos.y + Amplitude * sin, Basepos.z);
+            transform.position = new Vector3(Basepos.x+AmplitudeY*sinX, Basepos.y + AmplitudeY * sinY, Basepos.z+AmplitudeY*sinZ);
         }
     }
 
