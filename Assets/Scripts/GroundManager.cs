@@ -29,8 +29,14 @@ public class GroundManager : MonoBehaviour
             GameObject hitground = grounds[pickgound];
             Debug.Log("破壊される床は;"+hitground.name);
 
-            //選ばれたオブジェクトにスクリプトを適応させる
 
+
+            //選ばれたオブジェクトにスクリプトを適応させる
+            GroundManager gm = GetComponent<GroundManager>();
+            if(gm!=null)
+            {
+                gm.enabled = true;
+            }
         }
 
     }
@@ -70,5 +76,4 @@ public class GroundManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Destroy(this.gameObject);
     }
-
 }
