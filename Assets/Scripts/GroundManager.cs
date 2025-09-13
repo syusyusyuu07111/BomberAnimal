@@ -8,6 +8,7 @@ public class GroundManager : MonoBehaviour
     [SerializeField] public float NoiseSpeed;
     [SerializeField] public float AmplitudeY=0.05f;//—h‚ê•c•ûŒü
     [SerializeField] public float AmplitudeZ=0.03f;//—h‚ê•c•ûŒü
+    [SerializeField] public float SpeedIncrease=0.1f;//—h‚ê•c•ûŒü
 
     Vector3 Basepos;//Šî€‚ÌˆÊ’u
 
@@ -53,6 +54,8 @@ public class GroundManager : MonoBehaviour
     {
         if(TouchFlag)//ƒuƒƒbƒN‚ğ—h‚ç‚·
         {
+
+            NoiseSpeed+= SpeedIncrease * Time.deltaTime;
             //Šp“xŒvZ ƒÆ(t) = ƒÖ t + ƒÓ
             float Angle = Time.time * NoiseSpeed + NoiseOffset;
             //ƒTƒCƒ“‚Ì’l‚ğŒvZ
