@@ -1,21 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundManager : MonoBehaviour
 {
+
+    //ŠÇ——p======================================================================================================================
+    public bool activate = false;
+    public List<GroundManager> allground = new();//°‚Ìó‘Ô‚ğ•Û
+    public List<GroundManager> noactivate = new();//—LŒø‰»‚³‚ê‚Ä‚È‚¢°
+
+
+    //°ƒXƒe[ƒ^ƒX================================================================================================================
     [SerializeField] public float GroundHP;
     [SerializeField] public float FallCount=5.0f;
     [SerializeField] public float NoiseSpeed;
     [SerializeField] public float AmplitudeY=0.05f;//—h‚ê•c•ûŒü
     [SerializeField] public float AmplitudeZ=0.03f;//—h‚ê•c•ûŒü
     [SerializeField] public float SpeedIncrease=0.1f;//—h‚ê•c•ûŒü
-
     Vector3 Basepos;//Šî€‚ÌˆÊ’u
-
     public bool TouchFlag;
-
     public float NoiseOffset;
-
     public GameObject[]grounds;//”j‰ó‚Å‚«‚é°‚ğŠi”[
 
     private void Awake()
@@ -49,6 +54,10 @@ public class GroundManager : MonoBehaviour
     public void SetNoise()
     {
         NoiseOffset = UnityEngine.Random.Range(0f, 256f);
+    }
+    private void OnEnable()
+    {
+
     }
     private void Update()
     {
