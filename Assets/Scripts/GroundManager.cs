@@ -6,11 +6,9 @@ public class GroundManager : MonoBehaviour
 {
 
     //管理用======================================================================================================================
-    public bool activate = false;
-    public List<GroundManager> allground = new();//床の状態を保持
-    public List<GroundManager> noactivate = new();//有効化されてない床
-
-
+    static bool activate = false;
+    static List<GroundManager> allground = new();//床の状態を保持
+    static List<GroundManager> noactivate = new();//有効化されてない床
     //床ステータス================================================================================================================
     [SerializeField] public float GroundHP;
     [SerializeField] public float FallCount=5.0f;
@@ -21,48 +19,51 @@ public class GroundManager : MonoBehaviour
     Vector3 Basepos;//基準の位置
     public bool TouchFlag;
     public float NoiseOffset;
-    public GameObject[]grounds;//破壊できる床を格納
-
+    bool isactive = false;//壊れる床か判定
     private void Awake()
     {
-        //シーン内にある床を配列に格納する
-        grounds = GameObject.FindGameObjectsWithTag("Ground");
-        Debug.Log("床の数:"+grounds.Length);
-        //ランダムに選んで処理（ランダムな床を破壊可能にする）
-        if(grounds.Length>0)
-        {
-            int pickgound = Random.Range(0, grounds.Length);
-            GameObject hitground = grounds[pickgound];
-            Debug.Log("破壊される床は;"+hitground.name);
-
-
-
-            //選ばれたオブジェクトにスクリプトを適応させる
-            GroundManager gm = GetComponent<GroundManager>();
-            if(gm!=null)
-            {
-                gm.enabled = true;
-            }
-        }
-
+        allground.Add(this);//GroundManagerコンポーネントを参照
     }
     void Start()
     {
+       // コンポーネントを有効化するための準備----------------------------------------------------------------------------
+        if(!activate)
+        {
+            activate = true;
+            noactivate.AddRange(allground);//allgroundの床をnoactivateにすべてコピーする
+            StartCoroutine(activateRoutine());
+        }
+        //-------------------------------------------------------------------------------------------------------
         TouchFlag = false;
         Basepos = transform.position;//基準の位置
     }
+    //床にあるGroundManagerを一つずつ有効化していく===============================================================
+    IEnumerator activateRoutine()
+    {
+        while(noactivate.Count>0)
+        {
+            int PickGround = Random.Range(0, noactivate.Count);
+            var Chosen = noactivate[PickGround];//選ばれたブロッくを取得
+            if(Chosen!=null)//選ばれたブロックのコンポーネントを有効化する------------------------------------------
+            {
+                Chosen.isactive = true;
+                Debug.Log("選ばれた床;" + Chosen.name);
+                noactivate.RemoveAt(PickGround);
+                yield return new WaitForSeconds(3f);
+            }
+;       }
+    }
+    //==============================================================================================================
     public void SetNoise()
     {
         NoiseOffset = UnityEngine.Random.Range(0f, 256f);
     }
-    private void OnEnable()
-    {
-
-    }
     private void Update()
     {
-        if(TouchFlag)//ブロックを揺らす
+        if(!(TouchFlag&&isactive))
+        if (TouchFlag&&isactive)//ブロックを揺らす
         {
+
 
             NoiseSpeed+= SpeedIncrease * Time.deltaTime;
             //角度計算 θ(t) = ω t + φ
@@ -72,11 +73,19 @@ public class GroundManager : MonoBehaviour
             float sinY = Mathf.Sin(Angle);//上下
             float sinZ = Mathf.Sin(Angle+Mathf.PI);//奥
             //座標を反映
-            transform.position = new Vector3(Basepos.x+AmplitudeY*sinX, Basepos.y + AmplitudeY * sinY, Basepos.z+AmplitudeY*sinZ);
+            transform.position = new Vector3(Basepos.x+AmplitudeY*sinX, Basepos.y + AmplitudeY * sinY, Basepos.z+AmplitudeZ*sinZ);
         }
     }
+    //有効化されたときの挙動(初期化)===================================================================================================-
+    private void OnEnable()
+    {
+        NoiseOffset = Random.Range(0f, 256f);
+        TouchFlag = false;
+    }
+    //==========================================================================================================================
     private void OnCollisionEnter(Collision collision)
     {
+        if (isactive) return;
         if(collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(FallBlock(FallCount));
