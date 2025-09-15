@@ -57,6 +57,7 @@ public class GameOver : MonoBehaviour
                 selected = UIState.Right;
                 OutLine.anchoredPosition += new Vector2(MoveX, 0);
                 Debug.Log("右のボタンに移りました");
+                Debug.Log("移動量" +MoveX);
                 return;
             }
         }
@@ -71,6 +72,7 @@ public class GameOver : MonoBehaviour
             {
                 selected = UIState.Left;
                 Debug.Log("左のボタンに移りました");
+                OutLine.anchoredPosition -= new Vector2(MoveX, 0);
                 return;
             }
         }

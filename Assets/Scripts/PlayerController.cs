@@ -15,7 +15,11 @@ public class PlayerController : MonoBehaviour
 
     public bool CanJump;
     public bool IsGround;
-    public float JumpPower=10.0f;
+    public float JumpPower = 10.0f;
+
+    //ジャイロ用設定=======================================================================================
+    [SerializeField] float senser = 90f;
+
 
     public void Awake()
     {
@@ -52,9 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             //移動方向にキャラを回転（向きを変える）
             Quaternion PlayerRot = Quaternion.LookRotation(MoveDir, Vector3.up); //進行方向を向く回転
-            Quaternion MoveRot = Quaternion.RotateTowards(
-                rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime
-            );
+            Quaternion MoveRot = Quaternion.RotateTowards(rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime);
             rb.MoveRotation(MoveRot); //Rigidbodyで回転
         }
 

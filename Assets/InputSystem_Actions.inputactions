@@ -1094,6 +1094,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Camera",
+            "id": "241d5c6c-d119-4f29-9cf8-b77ca80d9ab0",
+            "actions": [
+                {
+                    "name": "tilt",
+                    "type": "Value",
+                    "id": "3eb76dbc-ab9d-4216-ab09-8ab281080cc2",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e860bb5b-0b69-43b8-846f-acec023ff39d",
+                    "path": "<Accelerometer>/acceleration",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
