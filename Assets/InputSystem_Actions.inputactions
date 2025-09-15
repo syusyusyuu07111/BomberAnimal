@@ -1100,7 +1100,7 @@
             "id": "241d5c6c-d119-4f29-9cf8-b77ca80d9ab0",
             "actions": [
                 {
-                    "name": "tilt",
+                    "name": "Tilt",
                     "type": "Value",
                     "id": "3eb76dbc-ab9d-4216-ab09-8ab281080cc2",
                     "expectedControlType": "Vector3",
@@ -1116,8 +1116,41 @@
                     "path": "<Accelerometer>/acceleration",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "tilt",
+                    "groups": ";Gamepad;Keyboard&Mouse;Touch;Joystick;XR",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d1e704e-f485-445b-9ad9-a0cf928358d9",
+                    "path": "<Gyroscope>/angularVelocity",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3892ea67-df07-432e-9756-339d85dcd592",
+                    "path": "\\<DualShock4GamepadHID\\>/angularVelocity",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc3cd0cb-4221-440f-b078-a22c159daacd",
+                    "path": "\\<DualShock4GamepadHID\\>/acceleration",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

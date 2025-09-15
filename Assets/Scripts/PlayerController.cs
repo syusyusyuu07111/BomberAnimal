@@ -16,11 +16,6 @@ public class PlayerController : MonoBehaviour
     public bool CanJump;
     public bool IsGround;
     public float JumpPower = 10.0f;
-
-    //ÉWÉÉÉCÉçópê›íË=======================================================================================
-    [SerializeField] float senser = 90f;
-
-
     public void Awake()
     {
         inputActions = new InputSystem_Actions();

@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
+using IS = UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class AimCamera : MonoBehaviour
 {
@@ -16,6 +19,8 @@ public class AimCamera : MonoBehaviour
     private float Distance = 3.0f;
     Transform CamTransform;
 
+
+
     private void Awake()
     {
         input = new InputSystem_Actions();
@@ -29,8 +34,8 @@ public class AimCamera : MonoBehaviour
     private void Start()
     {
         Player = GameObject.Find("Player");
-        Camera.main.transform.position = Player.transform.position + offset;
     }
+
     private void LateUpdate()
     {
         //カメラ設定　追従＆オービットカメラ コントロ―ラ入力=============================================================================
@@ -40,7 +45,14 @@ public class AimCamera : MonoBehaviour
             //カメラ回転　オービットカメラ（キャラクターの周りを回る）------------------------------------------------------
             //入力を計算----------------------------------------------------------------------------------------------------
             Vector2 Lookinput = input.Player.Look.ReadValue<Vector2>();
+
             yaw += Lookinput.x * RotateSpeed * Time.deltaTime;
+
+            //ジャイロ設定 ジャイロ値参照------------------------------------------------------------------------------------------------------------------
+            Vector3 gyro = SinglePadGyroLogger.GyroValue;
+            yaw += gyro.y * 5000.0f * Time.deltaTime;
+
+            Debug.Log(SinglePadGyroLogger.GyroValue);
 
             //プレイヤーを基準に水平方向に回転させる-----------------------------------------------------------------------------
             Vector3 Pivot = Player.transform.position + new Vector3(0, height, 0);
@@ -49,8 +61,8 @@ public class AimCamera : MonoBehaviour
 
             CamTransform.position = DesireCameraPos;
             CamTransform.LookAt(Pivot, Vector3.up);
+
+            Debug.Log(input.Camera.Tilt.ReadValue<Vector3>());
         }
-        //ジャイロ操作=====================================================================================================================
-        Vector3 gyroinput = input.Camera.tilt.ReadValue<Vector3>();
     }
 }

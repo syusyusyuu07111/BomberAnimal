@@ -1186,7 +1186,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""241d5c6c-d119-4f29-9cf8-b77ca80d9ab0"",
             ""actions"": [
                 {
-                    ""name"": ""tilt"",
+                    ""name"": ""Tilt"",
                     ""type"": ""Value"",
                     ""id"": ""3eb76dbc-ab9d-4216-ab09-8ab281080cc2"",
                     ""expectedControlType"": ""Vector3"",
@@ -1202,8 +1202,41 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""path"": ""<Accelerometer>/acceleration"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""tilt"",
+                    ""groups"": "";Gamepad;Keyboard&Mouse;Touch;Joystick;XR"",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d1e704e-f485-445b-9ad9-a0cf928358d9"",
+                    ""path"": ""<Gyroscope>/angularVelocity"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3892ea67-df07-432e-9756-339d85dcd592"",
+                    ""path"": ""\\<DualShock4GamepadHID\\>/angularVelocity"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc3cd0cb-4221-440f-b078-a22c159daacd"",
+                    ""path"": ""\\<DualShock4GamepadHID\\>/acceleration"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1301,7 +1334,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_tilt = m_Camera.FindAction("tilt", throwIfNotFound: true);
+        m_Camera_Tilt = m_Camera.FindAction("Tilt", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1796,7 +1829,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // Camera
     private readonly InputActionMap m_Camera;
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
-    private readonly InputAction m_Camera_tilt;
+    private readonly InputAction m_Camera_Tilt;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -1809,9 +1842,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public CameraActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Camera/tilt".
+        /// Provides access to the underlying input action "Camera/Tilt".
         /// </summary>
-        public InputAction @tilt => m_Wrapper.m_Camera_tilt;
+        public InputAction @Tilt => m_Wrapper.m_Camera_Tilt;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1838,9 +1871,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
-            @tilt.started += instance.OnTilt;
-            @tilt.performed += instance.OnTilt;
-            @tilt.canceled += instance.OnTilt;
+            @Tilt.started += instance.OnTilt;
+            @Tilt.performed += instance.OnTilt;
+            @Tilt.canceled += instance.OnTilt;
         }
 
         /// <summary>
@@ -1852,9 +1885,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="CameraActions" />
         private void UnregisterCallbacks(ICameraActions instance)
         {
-            @tilt.started -= instance.OnTilt;
-            @tilt.performed -= instance.OnTilt;
-            @tilt.canceled -= instance.OnTilt;
+            @Tilt.started -= instance.OnTilt;
+            @Tilt.performed -= instance.OnTilt;
+            @Tilt.canceled -= instance.OnTilt;
         }
 
         /// <summary>
@@ -2131,7 +2164,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface ICameraActions
     {
         /// <summary>
-        /// Method invoked when associated input action "tilt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Tilt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
