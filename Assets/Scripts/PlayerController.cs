@@ -72,10 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             CanJump = false;
             rb.AddForce(transform.up * JumpPower, ForceMode.Impulse);
-            if (!MoveSource.isPlaying)
-            {
-                MoveSource.PlayOneShot(Jump);
-            }
+            MoveSource.PlayOneShot(Jump);
         }
     }
     //°‚ÉG‚ê‚Ä‚½‚çƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
