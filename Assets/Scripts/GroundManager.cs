@@ -51,7 +51,7 @@ public class GroundManager : MonoBehaviour
     //床にあるGroundManagerを一つずつ有効化していく===============================================================
     IEnumerator activateRoutine()
     {
-        while (noactivate.Count > -3)
+        while (noactivate.Count > -30)
         {
             int PickGround = Random.Range(0, noactivate.Count);
             var Chosen = noactivate[PickGround];//選ばれたブロッくを取得

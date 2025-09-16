@@ -10,7 +10,6 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
-using static UnityEditor.Progress;
 
 public class PickItem : MonoBehaviour
 {
@@ -33,7 +32,7 @@ public class PickItem : MonoBehaviour
     [SerializeField] float spinStrength = 3f;     // 回転
     [SerializeField] float rePickDelay = 0.25f;   // 投げた直後は拾えない猶予
 
-    [SerializeField, Range(0f, 60f)] float throwPitchDeg = 20f; 
+    [SerializeField, Range(0f, 60f)] float throwPitchDeg = 20f;
 
     Rigidbody Itemrb;
 
@@ -93,7 +92,7 @@ public class PickItem : MonoBehaviour
             if (distance <= pickdistance)//距離近いとき
             {
 
-                
+
                 //テキストがカメラの方向を見るようにする（正面に合わせる）
                 transform.LookAt(transform.position + Cam.transform.forward);
 
@@ -125,7 +124,7 @@ public class PickItem : MonoBehaviour
             {
 
 
-               
+
                 Debug.Log("拾えない距離");
             }
 
@@ -167,13 +166,13 @@ public class PickItem : MonoBehaviour
         Item.localPosition = Vector3.zero;
         Item.localRotation = Quaternion.identity;
 
-     
+
 
 
 
     }
 
-    
+
 
 
 }

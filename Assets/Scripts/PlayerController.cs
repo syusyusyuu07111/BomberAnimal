@@ -16,6 +16,12 @@ public class PlayerController : MonoBehaviour
     public bool CanJump;
     public bool IsGround;
     public float JumpPower = 10.0f;
+
+    //オーディオ系==========================================================================================================
+    [SerializeField] AudioSource JumpSource;
+    [SerializeField] AudioSource MoveSource;
+    [SerializeField] AudioClip Jump;
+    [SerializeField] AudioClip Move;
     public void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -41,18 +47,21 @@ public class PlayerController : MonoBehaviour
 
         Vector3 MoveDir = CamForward * moveInput.y + CamRight * moveInput.x; //進む方向
 
-        // ↓ transformを直接動かすのはRigidbodyと競合するのでコメントアウト
-        // transform.position += MoveDir.normalized * MoveSpeed * Time.deltaTime; //進む挙動
 
         Vector3 nextPos = rb.position + MoveDir.normalized * MoveSpeed * Time.fixedDeltaTime; //次の位置
         rb.MovePosition(nextPos); //Rigidbodyで移動
 
-        if (MoveDir.magnitude > 0.0001f)
+        if (MoveDir.sqrMagnitude > 0.0001f)
         {
-            //移動方向にキャラを回転（向きを変える）
+            //移動方向にキャラを回転（向きを変える)&移動--------------------------------------------------------------------------------------
             Quaternion PlayerRot = Quaternion.LookRotation(MoveDir, Vector3.up); //進行方向を向く回転
             Quaternion MoveRot = Quaternion.RotateTowards(rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime);
             rb.MoveRotation(MoveRot); //Rigidbodyで回転
+            //移動中に足音SE---------------------------------------------------------------------------------------------------------------------
+            if (!JumpSource.isPlaying)
+            {
+                JumpSource.PlayOneShot(Move);
+            }
         }
 
     }
@@ -63,6 +72,10 @@ public class PlayerController : MonoBehaviour
         {
             CanJump = false;
             rb.AddForce(transform.up * JumpPower, ForceMode.Impulse);
+            if (!MoveSource.isPlaying)
+            {
+                MoveSource.PlayOneShot(Jump);
+            }
         }
     }
     //床に触れてたらフラグを切り替える
