@@ -21,7 +21,7 @@ public class BombBreak : MonoBehaviour
             Rigidbody rb = collider.GetComponent<Rigidbody>();
             if(rb!=null)
             {
-                rb.AddExplosionForce(1000f, transform.position, 5f, 0f, ForceMode.Impulse);
+                rb.AddExplosionForce(250f, transform.position, 5f, 0f, ForceMode.Impulse);
             }
         }
         Destroy(this.gameObject);
