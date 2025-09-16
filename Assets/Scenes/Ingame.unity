@@ -372,7 +372,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &28277121 stripped
 Transform:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 243182715}
@@ -1381,7 +1381,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &277292628
 GameObject:
@@ -1436,7 +1436,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 277292632}
@@ -1542,7 +1542,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &330585543
 GameObject:
@@ -2235,7 +2235,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &587320520
 GameObject:
@@ -2290,7 +2290,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 587320524}
@@ -2396,7 +2396,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &623207922
 GameObject:
@@ -2451,7 +2451,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 623207926}
@@ -2557,7 +2557,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &706024555
 GameObject:
@@ -2748,7 +2748,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 763704963}
@@ -2854,7 +2854,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &766674859
 GameObject:
@@ -2909,7 +2909,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 766674863}
@@ -3015,7 +3015,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &832575517
 GameObject:
@@ -3119,7 +3119,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 833093843}
@@ -3225,7 +3225,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &902102698
 GameObject:
@@ -3437,7 +3437,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &918745337
 GameObject:
@@ -3492,7 +3492,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 918745341}
@@ -3598,7 +3598,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &984069192
 GameObject:
@@ -3653,7 +3653,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 984069196}
@@ -3759,7 +3759,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1083999101
 GameObject:
@@ -3814,7 +3814,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1083999105}
@@ -3920,7 +3920,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1001 &1105645533
 PrefabInstance:
@@ -4302,7 +4302,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1222079402}
@@ -4408,7 +4408,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1243136283
 GameObject:
@@ -4571,7 +4571,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1261752116}
@@ -4677,7 +4677,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1287166129
 GameObject:
@@ -4732,7 +4732,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1287166133}
@@ -4838,7 +4838,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1331010544
 GameObject:
@@ -4893,7 +4893,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1331010548}
@@ -4999,7 +4999,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1345120510
 GameObject:
@@ -5268,7 +5268,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1491587531
 GameObject:
@@ -5429,7 +5429,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1510313798
 GameObject:
@@ -5801,7 +5801,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1633017502
 GameObject:
@@ -5856,7 +5856,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1633017506}
@@ -5962,7 +5962,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1678759012
 GameObject:
@@ -6271,7 +6271,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1854142369
 GameObject:
@@ -6326,7 +6326,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1854142373}
@@ -6432,7 +6432,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1857154023
 GameObject:
@@ -6593,7 +6593,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1875276982
 GameObject:
@@ -6648,7 +6648,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1875276986}
@@ -6754,7 +6754,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1965837553
 GameObject:
@@ -6809,7 +6809,7 @@ MonoBehaviour:
   NoiseSpeed: 10
   AmplitudeY: 0.05
   AmplitudeZ: 0.03
-  SpeedIncrease: 0.03
+  SpeedIncrease: 0.5
   TouchFlag: 0
   NoiseOffset: 0.1
   TargetRenderer: {fileID: 1965837557}
@@ -6915,7 +6915,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1965931580
 GameObject:
@@ -7076,7 +7076,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &2032868309
 GameObject:

@@ -6,7 +6,7 @@ public class GroundManager : MonoBehaviour
 {
 
     //管理用======================================================================================================================
-    static bool activate = false;
+    static bool Isactivate = false;
     static List<GroundManager> allground = new();//床の状態を保持
     static List<GroundManager> noactivate = new();//有効化されてない床
     //床ステータス================================================================================================================
@@ -33,9 +33,9 @@ public class GroundManager : MonoBehaviour
     void Start()
     {
         // コンポーネントを有効化するための準備----------------------------------------------------------------------------
-        if (!activate)
+        if (!Isactivate)
         {
-            activate = true;
+            Isactivate = true;
             noactivate.AddRange(allground);//allgroundの床をnoactivateにすべてコピーする
             StartCoroutine(activateRoutine());
         }
@@ -51,7 +51,7 @@ public class GroundManager : MonoBehaviour
     //床にあるGroundManagerを一つずつ有効化していく===============================================================
     IEnumerator activateRoutine()
     {
-        while (noactivate.Count > 0)
+        while (noactivate.Count > -3)
         {
             int PickGround = Random.Range(0, noactivate.Count);
             var Chosen = noactivate[PickGround];//選ばれたブロッくを取得
