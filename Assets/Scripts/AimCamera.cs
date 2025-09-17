@@ -50,7 +50,7 @@ public class AimCamera : MonoBehaviour
 
             //ジャイロ設定 ジャイロ値参照------------------------------------------------------------------------------------------------------------------
             Vector3 gyro = SinglePadGyroLogger.GyroValue;
-            yaw += gyro.y * 500.0f * Time.deltaTime;
+            yaw += gyro.y * 850.0f * Time.deltaTime;
             Debug.Log(SinglePadGyroLogger.GyroValue);
 
             //プレイヤーを基準に水平方向に回転させる-----------------------------------------------------------------------------

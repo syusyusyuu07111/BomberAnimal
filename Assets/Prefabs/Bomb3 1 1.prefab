@@ -353,19 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02b4be68d12cc94c86f2b71a4cb5629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 0}
-  Item: {fileID: 6662643170840216256}
-  handpos: {fileID: 0}
-  pickdistance: 1.5
-  TMP: {fileID: 6017483045897439793}
-  Bomb: {fileID: 6662643170840216256}
-  sucktime: 0.5
-  pick: 0
-  throwSpeed: 12
-  throwUpward: 1.5
-  spinStrength: 3
-  rePickDelay: 0.25
-  throwPitchDeg: 20
+  tmp: {fileID: 0}
+  showDistance: 2
+  offset: {x: 2, y: 0.6, z: 0}
 --- !u!114 &4937220388456419780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BombFirePrefab: {fileID: 8568824735626878389, guid: 009d33b37ccefbc49aa00ef646696500, type: 3}
+  OriginMass: 0
 --- !u!4 &6662643170840216256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be930d629bc89e346b3d2b496ab94aa0, type: 3}
