@@ -564,7 +564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &98642442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1147,14 +1147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413dc9a321d0e948a6fc79dae1565b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 1205120097}
-  projectilePrefab: {fileID: 7254724505758029929, guid: 05816b79fbbf80743ab575744e7df7b2, type: 3}
-  cooldown: 0.3
-  aimDistance: 100
-  aimCamera: {fileID: 330585545}
-  aimMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &172971504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,22 +1159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bac7941374d18a45bd550c537eca042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 5
-  groundCheck: {fileID: 200966935}
-  groundRadius: 0.2
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  blendParam: Blend
-  maxSpeedForBlend: 5
-  blendDampTime: 0.1
-  speedSnapEpsilon: 0.05
-  cam: {fileID: 330585546}
-  rotateSpeed: 720
-  autoFaceCameraWhenIdle: 1
-  idleFaceSpeed: 360
-  moveFaceThreshold: 0.05
 --- !u!54 &172971505
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1329,11 +1305,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &200966935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4872714130585634, guid: cd93828a0cf973e48b07726edcc42a41, type: 3}
-  m_PrefabInstance: {fileID: 121070958}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &243182711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,20 +1907,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a27a8edec9eb945ae081433bafb77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 172971507}
-  distance: 4
-  minDistance: 0.5
-  height: 2
-  sensitivityX: 120
-  sensitivityY: 120
-  minPitch: -20
-  maxPitch: 60
-  maxYawOffset: 80
-  collisionRadius: 0.25
-  skin: 0.05
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6348,7 +6305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1656515113
 BoxCollider:
   m_ObjectHideFlags: 0
