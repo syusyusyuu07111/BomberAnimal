@@ -1,4 +1,3 @@
-using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public bool CanJump;
     public bool IsGround;
     public float JumpPower = 10.0f;
-
     //オーディオ系==========================================================================================================
     [SerializeField] AudioSource JumpSource;
     [SerializeField] AudioSource MoveSource;
@@ -58,24 +56,24 @@ public class PlayerController : MonoBehaviour
             Quaternion MoveRot = Quaternion.RotateTowards(rb.rotation, PlayerRot, RotateDegPerSec * Time.fixedDeltaTime);
             rb.MoveRotation(MoveRot); //Rigidbodyで回転
             //移動中に足音SE---------------------------------------------------------------------------------------------------------------------
-            if (!JumpSource.isPlaying)
+            if (!MoveSource.isPlaying)
             {
-                JumpSource.PlayOneShot(Move);
+                MoveSource.PlayOneShot(Move);
             }
         }
 
     }
     private void Update()
     {
-        //ジャンプキー押されたらジャンプ
+        //ジャンプキー押されたらジャンプ-------------------------------------------------------------------------------------------------------------
         if (inputActions.Player.Jump.triggered && CanJump == true)
         {
             CanJump = false;
             rb.AddForce(transform.up * JumpPower, ForceMode.Impulse);
-            MoveSource.PlayOneShot(Jump);
+            JumpSource.PlayOneShot(Jump);
         }
     }
-    //床に触れてたらフラグを切り替える
+    //床に触れてたらフラグを切り替える-----------------------------------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))

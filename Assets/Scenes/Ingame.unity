@@ -1135,30 +1135,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &172971503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172971501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413dc9a321d0e948a6fc79dae1565b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &172971504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172971501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bac7941374d18a45bd550c537eca042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &172971505
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4510,12 +4486,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981, type: 3}
       insertIndex: -1
       addedObject: {fileID: 172971505}
-    - targetCorrespondingSourceObject: {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 172971504}
-    - targetCorrespondingSourceObject: {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 172971503}
     - targetCorrespondingSourceObject: {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981, type: 3}
       insertIndex: -1
       addedObject: {fileID: 172971502}
