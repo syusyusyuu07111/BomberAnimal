@@ -4,7 +4,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class SinglePadGyroLogger : MonoBehaviour
 {
-    private const string LayoutJson = @"{ 
+    private const string LayoutJson = @"{
       ""name"": ""DualShock4GamepadHIDCustom"",
       ""extend"": ""DualShock4GamepadHID"",
       ""controls"": [
@@ -22,25 +22,23 @@ public class SinglePadGyroLogger : MonoBehaviour
 
     [Header("オプション")]
     [SerializeField] private Vector3 gyroAxisScale = new Vector3(1, 1, 1);
-    [SerializeField] private float gyroUnitsToDegPerSec = 1.0f;
+    [SerializeField] private float gyroDegPerSec = 1.0f;
 
-    // ---- 外部から読める最新値 ----
-    public static Vector3 GyroValue { get; private set; }
-
+    // 入力値を外部で読み込めるようにする
+    public static Vector3 GyroValue { get;  set; }
+    //レイアウトをUnityに登録===================================================================================================
     private void Awake()
     {
         InputSystem.RegisterLayoutOverride(LayoutJson);
     }
-
+    //マイフレームジャイロの値を読み込む==========================================================================================
     private void Update()
     {
-        if (Gamepad.all.Count == 0) return;
         var pad = Gamepad.all[0];
         var gyroCtrl = pad.TryGetChildControl<Vector3Control>("gyro");
-        if (gyroCtrl == null) return;
 
-        // 値を更新して保持
+        // 値を更新して保持　角速度に変換する------------------------------------------------------------------------------------------------------
         Vector3 raw = gyroCtrl.ReadValue();
-        GyroValue = Vector3.Scale(raw, gyroAxisScale) * gyroUnitsToDegPerSec;
+        GyroValue = Vector3.Scale(raw, gyroAxisScale) * gyroDegPerSec;
     }
 }

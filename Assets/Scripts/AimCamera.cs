@@ -9,7 +9,6 @@ public class AimCamera : MonoBehaviour
     private GameObject Player;
     [SerializeField] private Vector3 offset = new Vector3(0, 3, 3);
     private float height = 1.6f;//目線の位置
-
     //入力&カメラ用===========================================================================
     InputSystem_Actions input;
     [Header("回転設定（オービット）")]
@@ -18,9 +17,7 @@ public class AimCamera : MonoBehaviour
     private float yaw;//向いている角度
     private float Distance = 3.0f;
     Transform CamTransform;
-
-
-
+    [SerializeField] public float Sensitivity=850.0f;
     private void Awake()
     {
         input = new InputSystem_Actions();
@@ -35,23 +32,19 @@ public class AimCamera : MonoBehaviour
     {
         Player = GameObject.Find("Player");
     }
-
-    private void LateUpdate()
+    private void Update()
     {
         //カメラ設定　追従＆オービットカメラ コントロ―ラ入力=============================================================================
         //追従設定----------------------------------------------------------------------------------------------------
-
         {
-            //カメラ回転　オービットカメラ（キャラクターの周りを回る）------------------------------------------------------
+            //カメラ回転　オービットカメラ（キャラクターの周りを回る、回転させる）------------------------------------------------------
             //入力を計算----------------------------------------------------------------------------------------------------
             Vector2 Lookinput = input.Player.Look.ReadValue<Vector2>();
-
             yaw += Lookinput.x * RotateSpeed * Time.deltaTime;
 
-            //ジャイロ設定 ジャイロ値参照------------------------------------------------------------------------------------------------------------------
-            Vector3 gyro = SinglePadGyroLogger.GyroValue;
-            yaw += gyro.y * 850.0f * Time.deltaTime;
-            Debug.Log(SinglePadGyroLogger.GyroValue);
+            //ジャイロ設定 ジャイロ値参照　感度設定------------------------------------------------------------------------------------------------------------------
+            Vector3 Gyro = SinglePadGyroLogger.GyroValue;
+            yaw += Gyro.y * Sensitivity * Time.deltaTime;
 
             //プレイヤーを基準に水平方向に回転させる-----------------------------------------------------------------------------
             Vector3 Pivot = Player.transform.position + new Vector3(0, height, 0);
@@ -60,8 +53,6 @@ public class AimCamera : MonoBehaviour
 
             CamTransform.position = DesireCameraPos;
             CamTransform.LookAt(Pivot, Vector3.up);
-
-            Debug.Log(input.Camera.Tilt.ReadValue<Vector3>());
         }
     }
 }

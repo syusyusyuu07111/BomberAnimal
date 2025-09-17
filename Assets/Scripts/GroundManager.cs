@@ -46,7 +46,6 @@ public class GroundManager : MonoBehaviour
         {
             TargetRenderer.material = NormalMaterial;
         }
-
     }
     //床にあるGroundManagerを一つずつ有効化していく===============================================================
     IEnumerator activateRoutine()
@@ -60,7 +59,6 @@ public class GroundManager : MonoBehaviour
                 Chosen.SetFloor(true);//SetFloor呼び出し
                 Debug.Log("選ばれた床;" + Chosen.name);
                 noactivate.RemoveAt(PickGround);
-
                 yield return new WaitForSeconds(3f);
             }
 ;
@@ -82,7 +80,7 @@ public class GroundManager : MonoBehaviour
         float sinX = Mathf.Cos(Angle);//横
         float sinY = Mathf.Sin(Angle);//上下
         float sinZ = Mathf.Sin(Angle + Mathf.PI);//奥
-                                                 //座標を反映
+        //座標を反映
         transform.position = new Vector3(Basepos.x + AmplitudeY * sinX, Basepos.y + AmplitudeY * sinY, Basepos.z + AmplitudeZ * sinZ);
     }
     //有効化されたときの挙動(初期化)===================================================================================================-
