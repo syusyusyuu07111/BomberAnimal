@@ -28,7 +28,6 @@ public class EnemyAI : MonoBehaviour
                     float step = Speed * Time.deltaTime;
                     MovePosition = new Vector3(SafePos.x, transform.position.y, SafePos.z);
                     transform.position = Vector3.MoveTowards(transform.position,MovePosition,step);
-                    //transform.position = Vector3.MoveTowards(SafePos.x,transform.position.y,SafePos.z);
                 }
             }
 

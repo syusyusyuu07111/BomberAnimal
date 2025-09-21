@@ -14,7 +14,6 @@ public class BombBreak : MonoBehaviour
         StartCoroutine("Explosion");
         rend = GetComponentsInChildren<Renderer>(true);
         col = GetComponentsInChildren<Collider>(true);
-
     }
     IEnumerator Explosion()
     {
@@ -35,7 +34,6 @@ public class BombBreak : MonoBehaviour
                 rend = GetComponentsInChildren<Renderer>(false);
                 col = GetComponentsInChildren<Collider>(false);
                 //---------------------------------------------------------------------------------------------------------------------
-
                 StartCoroutine(ReturnoriginMass(rb, OriginMass, 0.0001f));//mass‚ð–ß‚·
             }
         }
